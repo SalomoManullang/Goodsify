@@ -138,6 +138,9 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 <details>
     <summary></summary>
 
+  ![WhatsApp Image 2024-09-10 at 23 17 34_49fe833e](https://github.com/user-attachments/assets/d4452b5c-5d7d-4a32-a0da-ec2f2df696d5)
+
+
 1. Permintaan dari Pengguna: Pengguna mengakses URL tertentu (misalnya, /products), yang dikirimkan ke server Django.
 
 2. urls.py: Server mencocokkan URL yang diminta dengan pola yang ada di urls.py dan meneruskannya ke fungsi yang sesuai di views.py.
