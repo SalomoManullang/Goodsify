@@ -1,6 +1,7 @@
 **Nama**: Salomo Immanuel Putra  
 **NPM**: 2306219745  
 **Kelas**: PBP B
+**link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id/ **(harus dibukan di incognito)**
 
 **Proses Pembuatan Projek Django "Goodsify"**
 
@@ -78,10 +79,61 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
         path('', show_main, name='show_main'),
     ]
     ```
-    Kemudian aku juga menambahkan `main.urls` ke dalam url patters agar nantinya ketika aplikasi mau di run, yang ditampilkan adalah tampilan aplikasi main. 
+    Kemudian aku juga menambahkan `main.urls` ke dalam url patterns agar nantinya ketika aplikasi mau di run, yang ditampilkan adalah tampilan aplikasi main. 
 
 4. **Membuat model pada aplikasi `main` dengan nama produk dan punya beberapa atribut wajib**
-    
+    Pertama tama, aku membuka `models.py` pada main, kemudian didalam models.py tersebut, aku menambahkan beberapa atribut seperti ini :
+    ```bash 
+    name = models.CharField(max_length=255)
+    price = models.IntegerField()
+    description = models.TextField()
+    rating = models.PositiveSmallIntegerField(default=1, validators=[
+        MinValueValidator(1),
+        MaxValueValidator(5)])
+    ```
+    atribut yang aku tambahkan adalah nama, harga, deskripsi produk, serta rating bintang 1-5. 
+
+5. **Membuat sebuah fungsi pada `views.py` untuk dikembalikan ke dalam sebuah template HTML yang menampilkan   nama aplikasi serta nama dan kelas kamu.**
+    pertama tama, aku buat dahulu template HTML untuk nantinya akan menunjukkan beberapa artribut yang sudah kubuat. 
+    ```bash
+        <h3>Nama Produk:</h3>
+    <p><strong>{{ name }}</strong></p> 
+
+    <h3>Harga:</h3>
+    <p><em>{{ price }}</em></p> 
+    <h3>Deskripsi:</h3>
+    <p>{{ description }}</p>
+
+    <h3>Rating:</h3>
+    <p>{{ rating }}</p>
+    ```
+    dengan menggunakan template ini, nantinya saya dapat mengubah konteks dari value masing masing atribut yang akan ditunjukkan. saya juga menggunakan beberapa syntax seperti strong untuk membuat HTML yang ditujukkan lebih rapi. Kemudian, saya menyesuaikan context yang terdapat dalam `views.py` agar sesuai dengan produk saya.
+
+6. **Membuat sebuah routing pada `urls.py` aplikasi main untuk memetakan fungsi yang telah dibuat pada `views.py`.**
+    aku menyesuaikan isi pada `urlspatterns` dan menambahkan main sebagai nama aplikasi
+    ```bash
+    urlpatterns = [
+    path('', show_main, name='show_main'),
+    ]
+    ```
+    show main digunakan agar nantinya yang ditujukkan adalah aplikasi main. path nya masih diisi kosong agar nantinya aplikasi dapat diakses secara langsung.
+
+7. **Melakukan deployment ke PWS terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.**
+    pertama tama aku membuat projek baru pada PWS yang aku beri nama goodsify, kemudian aku ubah isi `ALLOWED_HOST` pada `settings.py` dengan format <username-sso>-<nama proyek>.pbp.cs.ui.ac.id. sehingga link situsku menjadi `salomo-immanuel-goodsify.pbp.cs.ui.ac.id` kemudian saya memasukkan username dan password yang sudah diberikan sebelumnya. Kemudian, aku melakukan push ke dalam PWS dari penyimpanan lokalku. 
+    ```bash
+    git push pws main:master
+    ```
+
+**request client ke web aplikasi berbasis Django**
+
+**Fungsi Git pada pengembangan perangkat lunak**
+
+**alasan mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak**
+
+**Mengapa model pada Django disebut sebagai ORM?**
+
+
+
 
 
 
