@@ -66,6 +66,22 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
    ```
    setelah itu saya mendaftarkan nama aplikasi main tersebut ke dalam `INSTALLED_APPS`
 
+3. **Melakukan routing pada `main` agar dapat menjalankan aplikasi**
+    kita perlu melakukan routing pada main agar web yang kita buat dapat diakses melalui web. pertama tama aku mengubah isi `urls.py` dan sesuaikan dengan appku yang namanya `main` dengan kode seperti ini:
+    ```bash
+    from django.urls import path
+    from main.views import show_main
+
+    app_name = 'main'
+
+    urlpatterns = [
+        path('', show_main, name='show_main'),
+    ]
+    ```
+    Kemudian aku juga menambahkan `main.urls` ke dalam url patters agar nantinya ketika aplikasi mau di run, yang ditampilkan adalah tampilan aplikasi main. 
+
+4. **Membuat model pada aplikasi `main` dengan nama produk dan punya beberapa atribut wajib**
+    
 
 
 
