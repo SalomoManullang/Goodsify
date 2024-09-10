@@ -189,8 +189,12 @@ Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering
   <summary></summary>
 Django sering dipilih sebagai framework untuk memulai belajar pengembangan perangkat lunak karena memiliki banyak keunggulan. Salah satunya, Django dibangun menggunakan Python, bahasa pemrograman dengan sintaks yang sederhana dan mudah dipelajari oleh pemula. Django juga menggunakan pola Model-View-Template (MVT) yang memisahkan komponen aplikasi dengan jelas, sehingga mempermudah pengembang dalam memahami cara berbagai bagian aplikasi web bekerja satu sama lain. Django juga sudah dilengkapi oleh fitur yang lengkap sehingga programmer tidak mulai dari nol. Kesimpulannya, django sudah lengkap dan mudah untuk dipelajari untuk pemula.
 
+</details>
+
 ## Mengapa Model pada Django Disebut sebagai ORM?
 
+<details>
+  <summary></summary>
 ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak yang memungkinkan pengembang untuk berinteraksi dengan basis data menggunakan objek-objek dari bahasa pemrograman yang mereka gunakan, alih-alih menulis perintah SQL langsung. Django disebut sebagai ORM (Object-Relational Mapping) karena Django menggunakan pendekatan ORM untuk mengelola interaksi antara aplikasi dan basis data.Pada Django, setiap model merupakan representasi dari tabel dalam basis data, di mana atribut model tersebut menggambarkan kolom-kolom dalam tabel. Dengan ORM, pengembang dapat melakukan operasi seperti membuat, membaca, memperbarui, dan menghapus data menggunakan python, sementara Django akan secara otomatis menerjemahkan tindakan tersebut ke dalam perintah SQL yang sesuai untuk berinteraksi dengan basis data. 
 
 </details>
