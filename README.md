@@ -135,7 +135,8 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 </details>
 
 ## Request Client ke Web Aplikasi Berbasis Django
-<summary></summary>
+<details>
+    <summary></summary>
 
 1. Permintaan dari Pengguna: Pengguna mengakses URL tertentu (misalnya, /products), yang dikirimkan ke server Django.
 
