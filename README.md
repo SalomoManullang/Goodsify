@@ -2,7 +2,7 @@
 **NPM**: 2306219745  
 **Kelas**: PBP B
 
-**link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id **(harus dibukan di incognito)**
+**link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id **(harus dibuka di incognito)**
 
 ## Proses Pembuatan Projek Django "Goodsify"
 <details>
