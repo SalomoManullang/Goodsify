@@ -1,6 +1,3 @@
-Berikut versi yang bisa langsung di-copy paste dengan rapi:
-
-```markdown
 **Proses Pembuatan Projek Django "Goodsify"**
 
 1. **Membuat sebuah repository Github baru** bernama `goodsify`.
@@ -26,10 +23,6 @@ Berikut versi yang bisa langsung di-copy paste dengan rapi:
      ```bash
      env\Scripts\activate
      ```
-   - MacOS/Linux:
-     ```bash
-     source env/bin/activate
-     ```
 
 6. **Membuat file bernama `requirements.txt` dengan isi sebagai berikut:**
 
@@ -46,6 +39,3 @@ Berikut versi yang bisa langsung di-copy paste dengan rapi:
    ```bash
    pip install -r requirements.txt
    ```
-```
-
-Silakan di-copy dan paste langsung!
