@@ -6,8 +6,7 @@
 
 ## Proses Pembuatan Projek Django "Goodsify"
 <details>
-  <summary>Klik untuk melihat detail</summary>
-
+  <summary></summary>
 
 setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirkan untuk membuat aplikasi yang berfokus pada jual beli barang online atau _e-commerce_ yang akan saya beri nama `goodsify`. goodsify sendiri adalah aplikasi yang berfokus pada penjualan barang barang bekas atau tidak terpakai. nantinya user dapat menampilkan nama, gambar, harga, dan deskripsi produk yang mereka jual disana. dan dapat bertransaksi menggunakan kartu atau rekening yang sudah ditautkan. 
 
@@ -136,14 +135,24 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 </details>
 
 ## Request Client ke Web Aplikasi Berbasis Django
-<summary>Klik untuk melihat detail</summary>
-This is how you dropdown.
+<summary></summary>
+
+1. Permintaan dari Pengguna: Pengguna mengakses URL tertentu (misalnya, /products), yang dikirimkan ke server Django.
+
+2. urls.py: Server mencocokkan URL yang diminta dengan pola yang ada di urls.py dan meneruskannya ke fungsi yang sesuai di views.py.
+
+3. views.py: View menangani request tersebut. Jika dibutuhkan, views.py berinteraksi dengan models.py untuk mengambil data dari basis data.
+
+4. models.py: Data yang diperlukan diambil dari basis data melalui model, kemudian dikirim kembali ke views.py.
+
+5. Template: views.py mengirimkan data yang diperoleh ke template HTML, yang kemudian merender data tersebut menjadi halaman web untuk dikirim kembali sebagai response kepada pengguna.
+
 </details>
 
 
 ## Fungsi Git pada Pengembangan Perangkat Lunak
 <details>
-  <summary>Klik untuk melihat detail</summary>
+  <summary></summary>
 
 Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering digunakan oleh programmer ketika mereka ingin mengerjakan suatu proyek yang membutuhkan banyak orang untuk mengerjakannya. Git memungkinkan mereka untuk menggabungkan kode mereka ke dalam satu repository seperti penyimpanan utama. Nantinya, programmer dapat mengerjakan bagian mereka masing masing baru di-_push_ ke dalam repository tersebut. Ini adalah beberapa fungsi git dalam pengembangan perangkat lunak:
 
@@ -173,7 +182,7 @@ Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering
 ## Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
 
 <details>
-  <summary>Klik untuk melihat detail</summary>
+  <summary></summary>
 Django sering dipilih sebagai framework untuk memulai belajar pengembangan perangkat lunak karena memiliki banyak keunggulan. Salah satunya, Django dibangun menggunakan Python, bahasa pemrograman dengan sintaks yang sederhana dan mudah dipelajari oleh pemula. Django juga menggunakan pola Model-View-Template (MVT) yang memisahkan komponen aplikasi dengan jelas, sehingga mempermudah pengembang dalam memahami cara berbagai bagian aplikasi web bekerja satu sama lain. Django juga sudah dilengkapi oleh fitur yang lengkap sehingga programmer tidak mulai dari nol. Kesimpulannya, django sudah lengkap dan mudah untuk dipelajari untuk pemula.
 
 ## Mengapa Model pada Django Disebut sebagai ORM?
