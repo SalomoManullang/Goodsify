@@ -1,6 +1,6 @@
-Nama : Salomo Immanuel Putra
-NPM : 2306219745
-Kelas : PBP B
+**Nama**: Salomo Immanuel Putra  
+**NPM**: 2306219745  
+**Kelas**: PBP B
 
 **Proses Pembuatan Projek Django "Goodsify"**
 
@@ -57,6 +57,16 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
     python manage.py runserver
     ```
     kemudian dengan mengecek di http://localhost:8000 saya bisa melihat apakah projek saya sudah berjalan atau belum
+
+2. **Membuat aplikasi dengan nama `main` pada projek tersebut :**
+   
+   pertama tama saya membuat dahulu projek aplikasi dengan nama `main`
+   ```bash
+   python manage.py startapp main
+   ```
+   setelah itu saya mendaftarkan nama aplikasi main tersebut ke dalam `INSTALLED_APPS`
+
+
 
 
 
