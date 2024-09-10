@@ -136,45 +136,48 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 </details>
 
 ## Request Client ke Web Aplikasi Berbasis Django
----
 <summary>Klik untuk melihat detail</summary>
 This is how you dropdown.
 </details>
 
 
 ## Fungsi Git pada Pengembangan Perangkat Lunak
----
 <details>
   <summary>Klik untuk melihat detail</summary>
 
 Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering digunakan oleh programmer ketika mereka ingin mengerjakan suatu proyek yang membutuhkan banyak orang untuk mengerjakannya. Git memungkinkan mereka untuk menggabungkan kode mereka ke dalam satu repository seperti penyimpanan utama. Nantinya, programmer dapat mengerjakan bagian mereka masing masing baru di-_push_ ke dalam repository tersebut. Ini adalah beberapa fungsi git dalam pengembangan perangkat lunak:
 
 1. **Dapat digunakan untuk kolaborasi**
+
     dengan menggunakna git, para programmer dapat mengunggah kode mereka ataupun mengambil kode orang lain sebagai inspirasi mereka. Dengan menggunakan repository, Setiap anggota tim dapat meng-clone repository ini ke komputer mereka, yang memungkinkan mereka bekerja secara lokal tanpa langsung memodifikasi repository utama. Dengan menggunakan merge, programmer juga bisa menggabungkan program mereka dengan program orang lain ke dalam 1 repository utama. Menggunakan branch, programmer daoat mengubah atau memperbarui program mereka tanpa harus mengubah data utama. Dalam jangka panjang, git dibutuhkan jika projeknya terus di-_update_
 
 2. **Membantu mengorganisir**
+
     menggunakan git, kita dapat memasukkan README yang nantinya dapat menjadi panduan programmer untuk mengerjakan proyek, selain itu git juga tidak jarang untuk digunakan sebagai tempat penyimpanan cloud karena rapi dan bersih. 
 
 3. **digunakan dalam proyek open source**
+
     Proyek open source adalah proyek pengembangan proyek di mana kode sumbernya (source code) tersedia secara bebas untuk dilihat, digunakan, dimodifikasi, dan didistribusikan oleh siapa saja. Artinya, siapa pun bisa berkontribusi untuk meningkatkan perangkat lunak tersebut atau menggunakan kodenya untuk membuat produk baru, tanpa perlu membayar lisensi. menggunakan fotur seperti clone, programmer dapat mengambil kode orang lain dan mengembangkannya. Disisi lain, proyek tersebut juga bisa di-_update_ oleh semua orang lewat perantara github. 
 
 4. **Plattform yang fleksibel**
+
     Git adalah plattform yang serbaguna, bisa digunakan ketika ingin menyimpan data, mengambil referensi, membuat proyek, dan masih banyak kegunaan lainnya. dengan adanya plattform yang fleksibel, programmer tak perlu menggunakan banyak plattform, sehingga lebih efektif.
 
 5. **Menjadi backup**
+
     Git dapat digunakan sebagai backup ketika data dalam penyimpanan lokal kita terhapus.
 
 </details>
 
 
 ## Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
----
+
 <details>
   <summary>Klik untuk melihat detail</summary>
 Django sering dipilih sebagai framework untuk memulai belajar pengembangan perangkat lunak karena memiliki banyak keunggulan. Salah satunya, Django dibangun menggunakan Python, bahasa pemrograman dengan sintaks yang sederhana dan mudah dipelajari oleh pemula. Django juga menggunakan pola Model-View-Template (MVT) yang memisahkan komponen aplikasi dengan jelas, sehingga mempermudah pengembang dalam memahami cara berbagai bagian aplikasi web bekerja satu sama lain. Django juga sudah dilengkapi oleh fitur yang lengkap sehingga programmer tidak mulai dari nol. Kesimpulannya, django sudah lengkap dan mudah untuk dipelajari untuk pemula.
 
 ## Mengapa Model pada Django Disebut sebagai ORM?
----
+
 ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak yang memungkinkan pengembang untuk berinteraksi dengan basis data menggunakan objek-objek dari bahasa pemrograman yang mereka gunakan, alih-alih menulis perintah SQL langsung. Django disebut sebagai ORM (Object-Relational Mapping) karena Django menggunakan pendekatan ORM untuk mengelola interaksi antara aplikasi dan basis data.Pada Django, setiap model merupakan representasi dari tabel dalam basis data, di mana atribut model tersebut menggambarkan kolom-kolom dalam tabel. Dengan ORM, pengembang dapat melakukan operasi seperti membuat, membaca, memperbarui, dan menghapus data menggunakan python, sementara Django akan secara otomatis menerjemahkan tindakan tersebut ke dalam perintah SQL yang sesuai untuk berinteraksi dengan basis data. 
 
 </details>
