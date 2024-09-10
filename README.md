@@ -3,7 +3,7 @@
 **Kelas**: PBP B
 **link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id/ **(harus dibukan di incognito)**
 
-**Proses Pembuatan Projek Django "Goodsify"**
+##Proses Pembuatan Projek Django "Goodsify"
 
 setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirkan untuk membuat aplikasi yang berfokus pada jual beli barang online atau _e-commerce_ yang akan saya beri nama `goodsify`. goodsify sendiri adalah aplikasi yang berfokus pada penjualan barang barang bekas atau tidak terpakai. nantinya user dapat menampilkan nama, gambar, harga, dan deskripsi produk yang mereka jual disana. dan dapat bertransaksi menggunakan kartu atau rekening yang sudah ditautkan. 
 
@@ -124,13 +124,18 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
     git push pws main:master
     ```
 
-**request client ke web aplikasi berbasis Django**
+## Request Client ke Web Aplikasi Berbasis Django
+---
 
-**Fungsi Git pada pengembangan perangkat lunak**
+## Fungsi Git pada Pengembangan Perangkat Lunak
+---
 
-**alasan mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak**
+## Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
+---
 
-**Mengapa model pada Django disebut sebagai ORM?**
+## Mengapa Model pada Django Disebut sebagai ORM?
+---
+
 
 
 
