@@ -199,7 +199,7 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 
 ### Cara mengimplementasi _checklist_ diatas
 
-5. **Cara mengimplementasikan form**
+1. **Cara mengimplementasikan form**
 
     pertama tama, saya membuat `forms.py` pada direktori `main`. pada file tersebut, saya membuat sebuah _blueprint_ forms dengan kode: 
 
@@ -328,6 +328,53 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
     dengan begitu, saya dapat membuat forum yang berisi pertanyaan terkait nama produk, harga, rating, dan deskripsi produk. Nantinya hasil jawaban tersebut akan tersimpan sebagai objek dan dituliskan dalam tabel.
 
 
+2. **Menambahkan 4 fungsi views baru untuk melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID.**
+
+    untuk membuat kita dapat melihat objek yang sudah ditambahkan dalam format XML, JSON, XML by ID, dan JSON by ID. Kita pertama tama perlu membuat methodnya terlebih dahulu. Oleh karena itu, saya pertama tama import asset yang dibutuhkan terlebih dahulu.
+    ```bash
+    from django.http import HttpResponse
+    from django.core import serializers
+    ```
+
+    Setelah itu, saya barulah membuat keempat method untuk melihat objek dalam format XML, JSON, XML by ID, dan JSON by ID. method ini saya masukkan dalam ``views.py``
+
+    ```bash
+    def show_xml(request):
+        data = Product.objects.all()
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json(request):
+        data = Product.objects.all()
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+    def show_xml_by_id(request, id):
+        data = Product.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json_by_id(request, id):
+        data = Product.objects.filter(pk=id)
+        return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    ```
+
+    dengan keempat method tersebut, kita dapat melihat objek dalam berbagai format.
+
+3. **Membuat routing URL untuk masing-masing views yang telah ditambahkan**
+    
+    untuk menghubungkan masing masing URL, pertama saya import terlebih dahulu function dari `views.py`
+
+    ```bash
+    from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id
+    ```
+
+    Kemudian, dalam `urls.py`, saya menambahkan path keempat method tersebut 
+    ```bash
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'),
+    path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
+    ```
+
+    dengan menambahkan keempat path tersebut, url nya menjadi saling terhubung dengan sistem utama. 
 
 ### Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 
