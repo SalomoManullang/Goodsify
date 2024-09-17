@@ -411,6 +411,15 @@ Jika `csrf_token` tidak ditambahkan, aplikasi menjadi rentan terhadap serangan C
 
 Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman berbahaya yang secara diam-diam mengirimkan permintaan ke aplikasi Django atas nama pengguna yang sedang aktif masuk. Misalnya, penyerang bisa membuat skrip yang secara otomatis melakukan permintaan POST ke server tanpa sepengetahuan pengguna. Tanpa adanya csrf_token, server tidak akan memiliki cara untuk membedakan apakah permintaan itu sah atau tidak. Hal ini dapat dimanfaatkan untuk mengubah pengaturan akun kalian.
 
+### Sreenshot Postman
+
+1. **Format XML**
+   ![image](https://github.com/user-attachments/assets/2965dd12-4283-426c-941a-371f35f45411)
+
+2. **Format JSON**
+   ![image](https://github.com/user-attachments/assets/b4cbfe47-4669-452f-b4d1-a381133f3ec0)
+
+3. 
 </details>
 
 
