@@ -197,6 +197,117 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 <details>
   <summary></summary>
 
+### Cara mengimplementasi _checklist_ diatas
+
+# Proses Implementasi Form
+
+1. **Membuat `forms.py`**
+   
+   Langkah pertama, saya membuat sebuah file bernama `forms.py` pada direktori `main`. Di dalam file tersebut, saya mendefinisikan _blueprint_ forms menggunakan `ModelForm` yang mengacu pada model `Product`.
+
+   ```python
+   from django.forms import ModelForm
+   from main.models import Product
+
+   class ProductForm(ModelForm):
+       class Meta:
+           model = Product
+           fields = ["name", "price", "description", "rating"]
+   ```
+
+**Membuat Method di `views.py` untuk Menyimpan Produk**
+
+   Selanjutnya, saya membuat sebuah method `create_product` di dalam `views.py`. Method ini bertanggung jawab untuk menangani pembuatan produk baru menggunakan form yang sudah kita buat.
+
+   ```python
+   def create_product(request):
+       form = ProductForm(request.POST or None)
+
+       if form.is_valid() and request.method == "POST":
+           form.save()
+           return redirect('main:show_main')
+
+       context = {'form': form}
+       return render(request, "create_product.html", context)
+   ```
+
+**Routing URL untuk Form Pembuatan Produk**
+
+   Untuk menghubungkan method `create_product` dengan URL yang bersangkutan, saya menambahkan path baru ke dalam `URL_PATTERN` di `urls.py` sebagai berikut:
+
+   ```python
+   path('create-product', create_product, name='create_product'),
+   ```
+
+**Menyesuaikan Context di `views.py`**
+
+   Kemudian, saya juga menyesuaikan context di `views.py` agar mengirimkan daftar produk ke template `main.html` dengan key `'Products'`.
+
+   ```python
+   def show_main(request):
+       products = Product.objects.all()
+       context = {
+           'Products': products  # Ganti key menjadi 'Products' agar sesuai dengan template
+       }
+       return render(request, "main.html", context)
+   ```
+
+**Menambahkan Halaman HTML untuk Formulir Produk**
+
+   Saya kemudian membuat sebuah file HTML baru di direktori `main/templates` dengan nama `create_product.html`. File ini digunakan untuk menampilkan form bagi pengguna untuk menambahkan produk baru. Contoh isi dari file ini adalah sebagai berikut:
+
+   ```html
+   {% extends 'base.html' %}
+   {% block content %}
+   <h1>Add New Product</h1>
+
+   <form method="POST">
+     {% csrf_token %}
+     <table>
+       {{ form.as_table }}
+       <tr>
+         <td></td>
+         <td>
+           <input type="submit" value="Add product" />
+         </td>
+       </tr>
+     </table>
+   </form>
+
+   {% endblock content %}
+   ```
+
+**Memodifikasi `main.html` untuk Menampilkan Tabel Produk**
+
+   Terakhir, saya memodifikasi `main.html` untuk menampilkan tabel berisi produk-produk yang telah ditambahkan. Produk ditampilkan dalam bentuk tabel dengan nama, harga, deskripsi, dan rating.
+
+   ```html
+   <table>
+     <tr>
+       <th>Nama Produk</th>
+       <th>Harga</th>
+       <th>Deskripsi</th>
+       <th>Rating</th>
+     </tr>
+
+     {% comment %} Berikut cara memperlihatkan data Produk di bawah baris ini {% endcomment %}
+     {% for Product in Products %}
+     <tr>
+       <td>{{ Product.name }}</td>
+       <td>{{ Product.price }}</td>
+       <td>{{ Product.description }}</td>
+       <td>{{ Product.rating }}</td>
+     </tr>
+     {% endfor %}
+   </table>
+   ```
+
+**Hasil Akhir**
+
+   Dengan implementasi di atas, saya dapat membuat sebuah form yang menanyakan nama produk, harga, rating, dan deskripsi produk. Setelah produk ditambahkan, data tersebut akan disimpan sebagai objek dan ditampilkan dalam bentuk tabel pada halaman utama.
+
+
+
 ### Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 
 **Data delivery** adalah proses pengiriman dan pertukaran data dari satu sistem, aplikasi, atau perangkat ke sistem lainnya. Ini melibatkan transfer informasi secara efisien, akurat, dan aman melalui jaringan atau infrastruktur komunikasi. Data delivery sangat diperlukan dalam suatu platform karena:
@@ -232,7 +343,6 @@ Jika `csrf_token` tidak ditambahkan, aplikasi menjadi rentan terhadap serangan C
 
 Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman berbahaya yang secara diam-diam mengirimkan permintaan ke aplikasi Django atas nama pengguna yang sedang aktif masuk. Misalnya, penyerang bisa membuat skrip yang secara otomatis melakukan permintaan POST ke server tanpa sepengetahuan pengguna. Tanpa adanya csrf_token, server tidak akan memiliki cara untuk membedakan apakah permintaan itu sah atau tidak. Hal ini dapat dimanfaatkan untuk mengubah pengaturan akun kalian.
 
-### Cara mengimplementasi _checklist_ diatas
 </details>
 
 
