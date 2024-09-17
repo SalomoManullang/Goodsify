@@ -9,7 +9,7 @@
 <details>
   <summary></summary>
 
-## Proses Pembuatan Projek Django "Goodsify"
+# Proses Pembuatan Projek Django "Goodsify"
 <details>
   <summary></summary>
 
@@ -139,7 +139,7 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 
 </details>
 
-## Request Client ke Web Aplikasi Berbasis Django
+# Request Client ke Web Aplikasi Berbasis Django
 <details>
     <summary></summary>
 
@@ -159,7 +159,7 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 </details>
 
 
-## Fungsi Git pada Pengembangan Perangkat Lunak
+# Fungsi Git pada Pengembangan Perangkat Lunak
 <details>
   <summary></summary>
 
@@ -188,7 +188,7 @@ Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering
 </details>
 
 
-## Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
+# Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
 
 <details>
   <summary></summary>
@@ -196,7 +196,7 @@ Django sering dipilih sebagai framework untuk memulai belajar pengembangan peran
 
 </details>
 
-## Mengapa Model pada Django Disebut sebagai ORM?
+# Mengapa Model pada Django Disebut sebagai ORM?
 
 <details>
   <summary></summary>
