@@ -1,4 +1,37 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+{% if not Product %}
+<p>Belum ada produk dalam GOODSIFY.</p>
+{% else %}
+<table>
+    <tr>
+      <th>Nama</th>
+      <th>Harga</th>
+      <th>Deskripsi</th>
+      <th>Rating</th>
+    </tr>
+
+{% comment %} Berikut cara memperlihatkan data produk di bawah baris ini 
+{% endcomment %} 
+{% for Product in Products %}
+<tr>
+    <td>{{Product.name}}</td>
+    <td>{{Product.price}}</td>
+    <td>{{Product.description}}</td>
+    <td>{{Product.rating}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+<a href="{% url 'main:create_product' %}">
+    <button>Add New product</button>
+  </a>
+  {% endblock content %}
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,6 +56,7 @@
 
     <h3>Harga:</h3>
     <p><em>{{ price }}</em></p> 
+
     <h3>Deskripsi:</h3>
     <p>{{ description }}</p>
 
@@ -30,4 +64,6 @@
     <p>{{ rating }}</p>
 
 </body>
-</html>
+</html> -->
+
+{% endblock content %}
