@@ -7,12 +7,10 @@
 # TUGAS 2
 
 <details>
-  <summary></summary>
-<div style="margin-left: 20px;">
+  <summary># TUGAS 2</summary>
 
-### Proses Pembuatan Projek Django "Goodsify"
 <details>
-  <summary></summary>
+  <summary>### Proses Pembuatan Projek Django "Goodsify"</summary>
 
 setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirkan untuk membuat aplikasi yang berfokus pada jual beli barang online atau _e-commerce_ yang akan saya beri nama `goodsify`. goodsify sendiri adalah aplikasi yang berfokus pada penjualan barang barang bekas atau tidak terpakai. nantinya user dapat menampilkan nama, gambar, harga, dan deskripsi produk yang mereka jual disana. dan dapat bertransaksi menggunakan kartu atau rekening yang sudah ditautkan. 
 
@@ -140,9 +138,8 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 
 </details>
 
-### Request Client ke Web Aplikasi Berbasis Django
 <details>
-    <summary></summary>
+    <summary>### Request Client ke Web Aplikasi Berbasis Django</summary>
 
   ![WhatsApp Image 2024-09-10 at 23 17 34_49fe833e](https://github.com/user-attachments/assets/d4452b5c-5d7d-4a32-a0da-ec2f2df696d5)
 
@@ -160,9 +157,8 @@ setelah mencoba mencari ide tentang aplikasi yang sesuai saya akhirnya terpikirk
 </details>
 
 
-### Fungsi Git pada Pengembangan Perangkat Lunak
 <details>
-  <summary></summary>
+  <summary>### Fungsi Git pada Pengembangan Perangkat Lunak</summary>
 
 Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering digunakan oleh programmer ketika mereka ingin mengerjakan suatu proyek yang membutuhkan banyak orang untuk mengerjakannya. Git memungkinkan mereka untuk menggabungkan kode mereka ke dalam satu repository seperti penyimpanan utama. Nantinya, programmer dapat mengerjakan bagian mereka masing masing baru di-_push_ ke dalam repository tersebut. Ini adalah beberapa fungsi git dalam pengembangan perangkat lunak:
 
@@ -189,18 +185,16 @@ Git adalah Salah satu perangkat lunak atau tools kolaborasi _coding_ yang sering
 </details>
 
 
-### Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
-
 <details>
-  <summary></summary>
+  <summary>### Alasan Mengapa Framework Django Dijadikan Permulaan Pembelajaran Pengembangan Perangkat Lunak
+</summary>
 Django sering dipilih sebagai framework untuk memulai belajar pengembangan perangkat lunak karena memiliki banyak keunggulan. Salah satunya, Django dibangun menggunakan Python, bahasa pemrograman dengan sintaks yang sederhana dan mudah dipelajari oleh pemula. Django juga menggunakan pola Model-View-Template (MVT) yang memisahkan komponen aplikasi dengan jelas, sehingga mempermudah pengembang dalam memahami cara berbagai bagian aplikasi web bekerja satu sama lain. Django juga sudah dilengkapi oleh fitur yang lengkap sehingga programmer tidak mulai dari nol. Kesimpulannya, django sudah lengkap dan mudah untuk dipelajari untuk pemula.
 
 </details>
 
-### Mengapa Model pada Django Disebut sebagai ORM?
 
 <details>
-  <summary></summary>
+  <summary>### Mengapa Model pada Django Disebut sebagai ORM?</summary>
 ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak yang memungkinkan pengembang untuk berinteraksi dengan basis data menggunakan objek-objek dari bahasa pemrograman yang mereka gunakan, alih-alih menulis perintah SQL langsung. Django disebut sebagai ORM (Object-Relational Mapping) karena Django menggunakan pendekatan ORM untuk mengelola interaksi antara aplikasi dan basis data.Pada Django, setiap model merupakan representasi dari tabel dalam basis data, di mana atribut model tersebut menggambarkan kolom-kolom dalam tabel. Dengan ORM, pengembang dapat melakukan operasi seperti membuat, membaca, memperbarui, dan menghapus data menggunakan python, sementara Django akan secara otomatis menerjemahkan tindakan tersebut ke dalam perintah SQL yang sesuai untuk berinteraksi dengan basis data. 
 
 </details>
@@ -209,7 +203,7 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 
 
 <details>
-  <summary></summary>
+  <summary>#TUGAS 3</summary>
 
 ### mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 
