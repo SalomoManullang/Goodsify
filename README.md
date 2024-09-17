@@ -222,12 +222,19 @@ Berikut adalah penomoran yang benar untuk poin-poin yang kamu sampaikan:
 
 Menurut saya pribadi, **JSON** lebih baik untuk digunakan dalam platform karena saya sendiri masih belajar dalam membuat platform sehingga saya lebih membutuhkan kemudahan dibandingkan fitur yang lengkap. Saya sendiri juga masih belum butuh untuk membuat platform yang cukup rumit untuk menggunakan **XML**. Kemudahan **JSON** itulah yang membuat saya berpikir **JSON** lebih baik.
 
+### Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut?
 
+Method `is_valid()` pada form Django berfungsi untuk memeriksa apakah data yang dimasukkan ke dalam form sesuai dengan aturan validasi yang telah ditentukan. Saat form diisi dan disubmit, Django menggunakan `is_valid()` untuk memastikan bahwa semua input memenuhi persyaratan, seperti format data, panjang karakter, dan tipe data yang benar. Method ini memeriksa setiap field, mendeteksi kesalahan, dan mengembalikan False jika ada data yang tidak valid, memungkinkan pengguna untuk memperbaiki input. Selain itu, `is_valid()` menghentikan proses lebih lanjut, seperti penyimpanan ke database, guna mencegah data yang salah atau rusak masuk ke sistem. Dengan demikian, method ini juga meningkatkan keamanan aplikasi, mencegah serangan injeksi (seperti SQL injection) dengan memastikan hanya data yang sah dan sesuai aturan yang diproses.
 
+### Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 
+**CSRF** (Cross-Site Request Forgery) adalah jenis serangan di mana penyerang dapat memaksa pengguna untuk mengirim permintaan yang tidak diinginkan dari browser mereka tanpa sepengetahuan mereka. Django menggunakan `csrf_token` untuk melindungi form dari serangan ini. Token ini adalah nilai unik yang dihasilkan setiap kali halaman dengan form dimuat dan harus dikirim bersama dengan permintaan POST. Ini memastikan bahwa permintaan hanya valid jika berasal dari sumber yang sah.
 
+Jika `csrf_token` tidak ditambahkan, aplikasi menjadi rentan terhadap serangan CSRF. Penyerang dapat membuat pengguna tanpa sadar mengirimkan permintaan berbahaya, seperti mengubah pengaturan akun atau melakukan transaksi yang tidak diinginkan, tanpa persetujuan pengguna.
 
+Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman berbahaya yang secara diam-diam mengirimkan permintaan ke aplikasi Django atas nama pengguna yang sedang aktif masuk. Misalnya, penyerang bisa membuat skrip yang secara otomatis melakukan permintaan POST ke server tanpa sepengetahuan pengguna. Tanpa adanya csrf_token, server tidak akan memiliki cara untuk membedakan apakah permintaan itu sah atau tidak. Hal ini dapat dimanfaatkan untuk mengubah pengaturan akun kalian.
 
+### Cara mengimplementasi _checklist_ diatas
 </details>
 
 
