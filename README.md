@@ -202,12 +202,16 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 **Data delivery** adalah proses pengiriman dan pertukaran data dari satu sistem, aplikasi, atau perangkat ke sistem lainnya. Ini melibatkan transfer informasi secara efisien, akurat, dan aman melalui jaringan atau infrastruktur komunikasi. Data delivery sangat diperlukan dalam suatu platform karena:
 
 1. Medium pengiriman yang luas
+
 Data dapat dikirim melalui berbagai jaringan, seperti internet, intranet, atau jaringan lokal. Data delivery mencakup penggunaan protokol tertentu, seperti HTTP, TCP/IP, atau protokol khusus seperti MQTT untuk IoT.
 2. Dapat menghubungkan berbagai komponen platform
+
 Data delivery menghubungkan berbagai bagian platform (frontend, backend, database), sehingga pengguna dapat berinteraksi dengan platform dan data diproses sesuai kebutuhan.
 3. Pengelolaan dan Penyimpanan data yang efektif
+
 Saat data dikirimkan dari satu bagian platform ke bagian lain (misalnya dari frontend ke server atau dari server ke database), data delivery memastikan bahwa informasi yang dikirim disimpan dengan benar dan dapat diakses kembali jika diperlukan.
 4. Pengelolaan data yang aman
+
 Data delivery juga mencakup pengiriman data secara aman. Dalam platform, informasi sensitif seperti data pengguna atau transaksi keuangan harus dikirimkan dengan protokol aman (misalnya menggunakan enkripsi). Hal ini untuk mencegah peretasan atau penyalahgunaan data selama proses pengiriman.
 
 
