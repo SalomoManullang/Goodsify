@@ -8,6 +8,7 @@
 
 <details>
   <summary></summary>
+<div style="margin-left: 20px;">
 
 ### Proses Pembuatan Projek Django "Goodsify"
 <details>
@@ -204,8 +205,20 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 
 </details>
 </details>
+</div>
 
 
+<details>
+  <summary></summary>
+
+### mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+
+
+
+
+
+
+</details>
 
 
 
