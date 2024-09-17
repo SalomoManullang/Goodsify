@@ -199,112 +199,133 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 
 ### Cara mengimplementasi _checklist_ diatas
 
-# Proses Implementasi Form
+5. **Cara mengimplementasikan form**
 
-1. **Membuat `forms.py`**
-   
-   Langkah pertama, saya membuat sebuah file bernama `forms.py` pada direktori `main`. Di dalam file tersebut, saya mendefinisikan _blueprint_ forms menggunakan `ModelForm` yang mengacu pada model `Product`.
+    pertama tama, saya membuat `forms.py` pada direktori `main`. pada file tersebut, saya membuat sebuah _blueprint_ forms dengan kode: 
 
-   ```python
-   from django.forms import ModelForm
-   from main.models import Product
+    ```bash
+    from django.forms import ModelForm
+    from main.models import Product
 
-   class ProductForm(ModelForm):
-       class Meta:
-           model = Product
-           fields = ["name", "price", "description", "rating"]
-   ```
+    class ProductForm(ModelForm):
+        class Meta:
+            model = Product
+            fields = ["name", "price", "description", "rating"]
+    ```
 
-**Membuat Method di `views.py` untuk Menyimpan Produk**
+    kemudian, dalam `views.py` saya membuat sebuah method untuk menciptakan produk sesuai dengan yang kita masukkan pada form. 
 
-   Selanjutnya, saya membuat sebuah method `create_product` di dalam `views.py`. Method ini bertanggung jawab untuk menangani pembuatan produk baru menggunakan form yang sudah kita buat.
+    ```bash
+    def create_product(request):
+        form = ProductForm(request.POST or None)
 
-   ```python
-   def create_product(request):
-       form = ProductForm(request.POST or None)
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return redirect('main:show_main')
 
-       if form.is_valid() and request.method == "POST":
-           form.save()
-           return redirect('main:show_main')
+        context = {'form': form}
+        return render(request, "create_product.html", context)
+    ```
 
-       context = {'form': form}
-       return render(request, "create_product.html", context)
-   ```
+    Kemudian, untuk melakukan routing ke URL yang bersangkutan, aku menambahkan path baru ke dalam `URL_PATTERN`
+    ```bash
+        path('create-product', create_product, name='create_product'),
+    ```
 
-**Routing URL untuk Form Pembuatan Produk**
+    Kemudian, dalam `views.py`, ubah context nya menjadi produk
+    ```bash
+        context = {
+            'Products': products  # Ganti key menjadi 'Products' agar sesuai dengan template
+        }
+    ```
+    Tidak lupa juga, saya kembali melengkapi `urls.py` agar tetap terhubung satu dengan lainnya. Setelah itu saya juga membuat halaman HTML baru pada direktori `main/templates`. yang bernama `create_product.html` yang isinya adalah _blueprint_ saat kita ingin membuat tombol membuat produk baru. Setelah itu, saya juga memodifikasi main.html untuk menampilkan tabel berisi produk produk yang sudah ditambahkan. 
 
-   Untuk menghubungkan method `create_product` dengan URL yang bersangkutan, saya menambahkan path baru ke dalam `URL_PATTERN` di `urls.py` sebagai berikut:
+    ```bash
+    <table>
+    <tr>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Deskripsi</th>
+        <th>Rating</th>
+    </tr>
 
-   ```python
-   path('create-product', create_product, name='create_product'),
-   ```
+    {% comment %} Berikut cara memperlihatkan data Produk di bawah baris ini 
+    {% endcomment %} 
+    {% for Product in Products %}
+    <tr>
+        <td>{{ Product.name }}</td>
+        <td>{{ Product.price }}</td>
+        <td>{{ Product.description }}</td>
+        <td>{{ Product.rating }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    ```
 
-**Menyesuaikan Context di `views.py`**
+    dengan begitu, saya dapat membuat forum yang berisi pertanyaan terkait nama produk, harga, rating, dan deskripsi produk. Nantinya hasil jawaban tersebut akan tersimpan sebagai objek dan dituliskan dalam tabel.
 
-   Kemudian, saya juga menyesuaikan context di `views.py` agar mengirimkan daftar produk ke template `main.html` dengan key `'Products'`.
+    pertama tama, saya membuat `forms.py` pada direktori `main`. pada file tersebut, saya membuat sebuah _blueprint_ forms dengan kode: 
 
-   ```python
-   def show_main(request):
-       products = Product.objects.all()
-       context = {
-           'Products': products  # Ganti key menjadi 'Products' agar sesuai dengan template
-       }
-       return render(request, "main.html", context)
-   ```
+    ```bash
+    from django.forms import ModelForm
+    from main.models import Product
 
-**Menambahkan Halaman HTML untuk Formulir Produk**
+    class ProductForm(ModelForm):
+        class Meta:
+            model = Product
+            fields = ["name", "price", "description", "rating"]
+    ```
 
-   Saya kemudian membuat sebuah file HTML baru di direktori `main/templates` dengan nama `create_product.html`. File ini digunakan untuk menampilkan form bagi pengguna untuk menambahkan produk baru. Contoh isi dari file ini adalah sebagai berikut:
+    kemudian, dalam `views.py` saya membuat sebuah method untuk menciptakan produk sesuai dengan yang kita masukkan pada form. 
 
-   ```html
-   {% extends 'base.html' %}
-   {% block content %}
-   <h1>Add New Product</h1>
+    ```bash
+    def create_product(request):
+        form = ProductForm(request.POST or None)
 
-   <form method="POST">
-     {% csrf_token %}
-     <table>
-       {{ form.as_table }}
-       <tr>
-         <td></td>
-         <td>
-           <input type="submit" value="Add product" />
-         </td>
-       </tr>
-     </table>
-   </form>
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return redirect('main:show_main')
 
-   {% endblock content %}
-   ```
+        context = {'form': form}
+        return render(request, "create_product.html", context)
+    ```
 
-**Memodifikasi `main.html` untuk Menampilkan Tabel Produk**
+    Kemudian, untuk melakukan routing ke URL yang bersangkutan, aku menambahkan path baru ke dalam `URL_PATTERN`
+    ```bash
+        path('create-product', create_product, name='create_product'),
+    ```
 
-   Terakhir, saya memodifikasi `main.html` untuk menampilkan tabel berisi produk-produk yang telah ditambahkan. Produk ditampilkan dalam bentuk tabel dengan nama, harga, deskripsi, dan rating.
+    Kemudian, dalam `views.py`, ubah context nya menjadi produk
+    ```bash
+        context = {
+            'Products': products  # Ganti key menjadi 'Products' agar sesuai dengan template
+        }
+    ```
+    Tidak lupa juga, saya kembali melengkapi `urls.py` agar tetap terhubung satu dengan lainnya. Setelah itu saya juga membuat halaman HTML baru pada direktori `main/templates`. yang bernama `create_product.html` yang isinya adalah _blueprint_ saat kita ingin membuat tombol membuat produk baru. Setelah itu, saya juga memodifikasi main.html untuk menampilkan tabel berisi produk produk yang sudah ditambahkan. 
 
-   ```html
-   <table>
-     <tr>
-       <th>Nama Produk</th>
-       <th>Harga</th>
-       <th>Deskripsi</th>
-       <th>Rating</th>
-     </tr>
+    ```bash
+    <table>
+    <tr>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Deskripsi</th>
+        <th>Rating</th>
+    </tr>
 
-     {% comment %} Berikut cara memperlihatkan data Produk di bawah baris ini {% endcomment %}
-     {% for Product in Products %}
-     <tr>
-       <td>{{ Product.name }}</td>
-       <td>{{ Product.price }}</td>
-       <td>{{ Product.description }}</td>
-       <td>{{ Product.rating }}</td>
-     </tr>
-     {% endfor %}
-   </table>
-   ```
+    {% comment %} Berikut cara memperlihatkan data Produk di bawah baris ini 
+    {% endcomment %} 
+    {% for Product in Products %}
+    <tr>
+        <td>{{ Product.name }}</td>
+        <td>{{ Product.price }}</td>
+        <td>{{ Product.description }}</td>
+        <td>{{ Product.rating }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+    ```
 
-**Hasil Akhir**
-
-   Dengan implementasi di atas, saya dapat membuat sebuah form yang menanyakan nama produk, harga, rating, dan deskripsi produk. Setelah produk ditambahkan, data tersebut akan disimpan sebagai objek dan ditampilkan dalam bentuk tabel pada halaman utama.
+    dengan begitu, saya dapat membuat forum yang berisi pertanyaan terkait nama produk, harga, rating, dan deskripsi produk. Nantinya hasil jawaban tersebut akan tersimpan sebagai objek dan dituliskan dalam tabel.
 
 
 
