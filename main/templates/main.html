@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {% block content %}
 
 {% if not Product %}
@@ -29,7 +29,7 @@
 <a href="{% url 'main:create_product' %}">
     <button>Add New product</button>
   </a>
-  {% endblock content %}
+  {% endblock content %} -->
 
 <!-- <!DOCTYPE html>
 <html lang="en">
@@ -82,4 +82,48 @@
 
 </body>
 </html>  -->
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>GOODSIFY</h1>
+
+<h5>NPM: </h5>
+<p>2306219745<p>
+
+<h5>Name:</h5>
+<p>Salomo Immanuel Putra</p>
+
+<h5>Class:</h5>
+<p>PBP B</p>
+
+{% if not Product %}
+<p>Belum ada produk dalam GOODSIFY.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Nama Produk</th>
+    <th>Harga</th>
+    <th>Deskripsi</th>
+    <th>Rating</th>
+  </tr>
+
+  {% comment %} Berikut cara memperlihatkan data Produk di bawah baris ini 
+  {% endcomment %} 
+  {% for mood_entry in mood_entries %}
+  <tr>
+    <td>{{Product.name}}</td>
+    <td>{{Product.price}}</td>
+    <td>{{Product.description}}</td>
+    <td>{{Product.rating}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+  <button>Tambahkan Produk</button>
+</a>
+{% endblock content %}
 
