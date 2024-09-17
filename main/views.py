@@ -7,11 +7,7 @@ from main.models import Product
 def show_main(request):
     products = Product.objects.all()
     context = {
-        'name' : 'Teh Botol Sosro',
-        'price': 'Rp.20.000',
-        'description': 'Nikmati kesegaran yang tiada duanya dengan Teh Botol Sosro, minuman teh melati berkualitas tinggi yang dikemas praktis dan siap diminum kapan saja. Terbuat dari daun teh pilihan dan bunga melati alami, Teh Botol Sosro menghadirkan rasa manis yang pas dan aroma teh yang khas, memberikan kesegaran sempurna di setiap tegukan.',
-        'rating': '3',
-        'product' : products
+        'Products': products  # Ganti key menjadi 'Products' agar sesuai dengan template
     }
 
     return render(request, "main.html", context)
