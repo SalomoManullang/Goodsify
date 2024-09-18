@@ -419,10 +419,10 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 2. **Format JSON**
    ![image](https://github.com/user-attachments/assets/2965dd12-4283-426c-941a-371f35f45411)
 
-3. **Format JSON by ID**
+3. **Format XML by ID**
    ![image](https://github.com/user-attachments/assets/fe4a42af-6197-43c5-a024-aa2c9d4b5c22)
 
-4. **Format XML by ID**
+4. **Format JSON by ID**
    ![image](https://github.com/user-attachments/assets/169fd8ae-e934-4ff1-a4e9-be9eea537a9a)
 
 </details>
