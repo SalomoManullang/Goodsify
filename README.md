@@ -413,16 +413,16 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 
 ### Sreenshot Postman
 
-1. **Format XML**
+1. **Format JSON**
    ![image](https://github.com/user-attachments/assets/2965dd12-4283-426c-941a-371f35f45411)
 
-2. **Format JSON**
+2. **Format XML**
    ![image](https://github.com/user-attachments/assets/b4cbfe47-4669-452f-b4d1-a381133f3ec0)
 
-3. **Format XML by ID**
+3. **Format JSON by ID**
    ![image](https://github.com/user-attachments/assets/fe4a42af-6197-43c5-a024-aa2c9d4b5c22)
 
-4. **Format JSON by ID**
+4. **Format XML by ID**
    ![image](https://github.com/user-attachments/assets/169fd8ae-e934-4ff1-a4e9-be9eea537a9a)
 
 </details>
