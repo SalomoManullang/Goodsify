@@ -4,7 +4,7 @@
 
 **link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id **(harus dibuka di incognito)**
 
-# TUGAS 2
+# TUGAS 2: Implementasi Model-View-Template (MVT) pada Django
 
 <details>
   <summary></summary>
@@ -192,7 +192,7 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 </details>
 
 
-# TUGAS 3
+# TUGAS 3: Implementasi Form dan Data Delivery pada Django
 
 <details>
   <summary></summary>
@@ -427,8 +427,36 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 
 </details>
 
+# TUGAS 4: Implementasi Autentikasi, Session, dan Cookies pada Django
+
+<details>
+  <summary></summary>
+
+### Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`?
+
+`HttpResponseRedirect()` adalah kelas di Django yang digunakan untuk mengarahkan pengguna menuju URL tertentu. kalian harus memberikan URL valid dan lengkap sebagai argumen. Misalnya, untuk mengarahkan ke `/some/url/`, kalian harus menggunakan `HttpResponseRedirect('/some/url/')`. Di sini, kalian perlu mengatur URL secara manual.
+
+Sedangkan, `redirect()` adalah fungsi yang lebih mudah dan fleksibel. Selain URL, fungsi ini bisa menerima nama tampilan atau objek Django sebagai argumen. Fungsi ini secara otomatis mengonversi argumen menjadi URL yang benar untuk pengalihan, sehingga kalian tidak perlu mengelola URL sendiri. Contohnya adalah: 
+
+```bash
+def my_view(request):
+    return redirect('/some/url/')
+```
+
+| **Aspek**                 | **HttpResponseRedirect()**                                      | **redirect()**                                               |
+|---------------------------|-----------------------------------------------------------------|--------------------------------------------------------------|
+| **Jenis**                 | Kelas respons HTTP                                             | Fungsi bantu (helper function)                               |
+| **Argumen yang Diterima**  | URL absolut atau relatif                                        | URL, nama tampilan (view name), atau objek (instance model)   |
+| **Pengelolaan URL**        | Harus mengelola pembuatan URL secara manual                     | Mengonversi argumen menjadi URL secara otomatis               |
+| **Fleksibilitas**          | Hanya menerima URL                                             | Lebih fleksibel, dapat menerima URL, nama tampilan, atau objek|
+| **Kemudahan Penggunaan**   | Mengharuskan pengguna mengelola detail URL                     | Lebih sederhana dan otomatis dalam pembuatan URL              |
+| **Contoh Penggunaan**      | `HttpResponseRedirect('/some/url/')`                           | `redirect('/some/url/')` atau `redirect('view-name')`         |
 
 
+
+
+
+</details>
 
 
 
