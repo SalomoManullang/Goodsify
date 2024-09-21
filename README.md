@@ -432,7 +432,7 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 <details>
   <summary></summary>
 
-### perbedaan antara `HttpResponseRedirect()` dan `redirect()`
+### Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
 
 `HttpResponseRedirect()` adalah kelas di Django yang digunakan untuk mengarahkan pengguna menuju URL tertentu. kalian harus memberikan URL valid dan lengkap sebagai argumen. Misalnya, untuk mengarahkan ke `/some/url/`, kalian harus menggunakan `HttpResponseRedirect('/some/url/')`. Di sini, kalian perlu mengatur URL secara manual.
 
@@ -454,11 +454,47 @@ def my_view(request):
 
 kesimpulannya, `redirect()` adalah cara yang lebih sederhana dan fleksibel untuk melakukan pengalihan (redirect) di Django dibandingkan dengan `HttpResponseRedirect()`. Dengan menggunakan `redirect()`, kalian dapat memberikan berbagai jenis argumen seperti URL, nama tampilan, atau objek model. Django akan secara otomatis mengonversi argumen tersebut ke URL yang benar, sehingga Anda tidak perlu mengelola pembuatan URL secara manual.
 
-### cara kerja penghubungan model MoodEntry dengan User
+### Cara kerja penghubungan model Product dengan User
 
 
+### perbedaan antara _authentication_ dan _authorization_ dan cara django mengimplementasikannya
+
+**Authentication** adalah proses memverifikasi identitas pengguna untuk memastikan mereka adalah pengguna yang sah dengan menggunakan kredensial seperti username dan password.
+
+**Authorization** adalah proses yang terjadi setelah otentikasi berhasil, di mana sistem menentukan tindakan dan sumber daya apa yang dapat diakses oleh pengguna berdasarkan peran atau izin yang dimilikinya. 
+
+Contohnya adalah ketika pengguna memasukkan nama dan password mereka, itu merupakan tahap **authentication**. Setelah itu, barulah sistem menentukan apa yang bisa dilakukan pengguna lewat **Authorization**. Misalnya pengguna adalah Customer, mereka hanya bisa membeli barang, sedangkan jika pengguna adalah Admin, mereka dapat menambahkan barang dan mengubah properti pada page. 
+
+Dalam Django, autentikasi dan otorisasi diimplementasikan melalui modul bawaan `django.contrib.auth`, yang mengelola proses login, logout, dan izin akses pengguna. Autentikasi memverifikasi identitas pengguna dengan memeriksa kredensial seperti username dan password menggunakan fungsi `authenticate()`, dan jika valid, pengguna akan diautentikasi serta diberikan sesi melalui `login()`. Setelah pengguna berhasil masuk, Django menerapkan otorisasi dengan menentukan apakah pengguna memiliki izin untuk mengakses sumber daya tertentu menggunakan permissions dan groups. 
 
 
+### Cara Django mengingat pengguna yang login
+
+Django mengingat pengguna yang telah login dengan menggunakan **cookies** dan **session**. Setelah pengguna berhasil login, Django menyimpan informasi sesi pada server dan mengirimkan _session ID_ ke browser pengguna dalam bentuk cookie. Setiap kali pengguna membuat permintaan baru (misalnya memuat halaman lain), browser mengirimkan cookie tersebut kembali ke server, memungkinkan Django untuk mengidentifikasi pengguna yang sedang aktif.
+
+### Apakah semua Cookies aman digunakan?
+
+Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhadap serangan dan eksploitasi oleh pihak yang tidak berwenang. Ada beberapa resiko keamanan yang dapat dilakukan peretas melalui cookies:
+
+1. **Cookies bisa dicuri**
+
+    Cookies disimpan di browser pengguna dan dapat dicuri melalui serangan tertentu, seperti **Cross-Site Scripting** (XSS). Jika cookie yang dicuri berisi informasi seperti session ID, penyerang bisa mengambil alih sesi pengguna dan berpura-pura menjadi pengguna yang sah.
+
+2. **Cookies bisa diintip**
+
+    Jika website menggunakan `HTTP` (bukan HTTPS), maka data yang dikirimkan, termasuk cookies, tidak dienkripsi. Ini berarti data tersebut dapat dengan mudah diintip oleh pihak ketiga di jaringan yang sama, seperti pada Wi-Fi publik. Penyerang bisa mendapatkan akses ke cookies dan menggunakan informasi tersebut untuk mencuri sesi atau informasi pribadi pengguna.
+
+3. **Cookies bisa dimanipulasi**
+
+    Cookies dapat dimodifikasi oleh penyerang jika mereka memiliki akses ke cookies di browser. Dengan cookies berisi session pengguna, penyerang bisa mendapatkan akses ke data atau area aplikasi yang tidak seharusnya mereka akses.
+
+4. **Serangan CSRF (Cross-Site Request Forgery)**
+
+    **CSRF** (Cross-Site Request Forgery) adalah jenis serangan di mana penyerang memanfaatkan sesi pengguna yang sah untuk melakukan tindakan berbahaya di situs web tanpa sepengetahuan atau persetujuan pengguna. Misalnya, kalian sedang login di _M - Banking_ dan seorang penyerang membuat Anda mengklik link berbahaya yang secara otomatis mengirim permintaan ke situs bank untuk mentransfer uang sebesar Rp.1.000.000,00 ke akun penyerang. Karena Anda sudah login, browser akan menyertakan cookies session kalian, dan situs bank akan memproses transfer tersebut seolah-olah kalian yang memintanya, padahal kalian tidak pernah memberikan persetujuan untuk itu.
+
+5. **Beberapa cookies memiliki waktu Experation yang lama**
+
+    Cookies bisa disetel untuk bertahan dalam waktu lama, bahkan setelah pengguna menutup browser. Jika cookies tetap aktif terlalu lama, ada risiko bahwa jika perangkat pengguna hilang atau dicuri, cookies tersebut bisa dimanfaatkan oleh orang lain untuk mengakses akun tanpa harus login ulang.
 
 
 </details>
