@@ -5,7 +5,6 @@
 **link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id **(harus dibuka di incognito)**
 
 # TUGAS 2: Implementasi Model-View-Template (MVT) pada Django
-================================================================
 
 <details>
   <summary></summary>
@@ -194,7 +193,6 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 
 
 # TUGAS 3: Implementasi Form dan Data Delivery pada Django
-===================================================================
 
 <details>
   <summary></summary>
@@ -430,100 +428,165 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 </details>
 
 # TUGAS 4: Implementasi Autentikasi, Session, dan Cookies pada Django
-===============================================================================
 
 <details>
   <summary></summary>
 
-### Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+### cara mengimplementasikan _Checklist_ tugas
 
-Setelah sebelumnya sudah membuat form untuk menambahkan produk yang ingin ditambahkan ke dalam aplikasi, selanjutnya saya akan membuat setiap pengguna memiliki akun mereka sendiri sendiri, sehingga setiap akun memiliki produk mereka sendiri sendiri. Pertama tama, Saya import dahulu `UserCreationForm` dan `messages` dalam `views.py`. kemudian, saya menambahkan fungsi `register`.
+1. **Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.**
 
-```bash
-def register(request):
-    form = UserCreationForm()
+    Setelah sebelumnya sudah membuat form untuk menambahkan produk yang ingin ditambahkan ke dalam aplikasi, selanjutnya saya akan membuat setiap pengguna memiliki akun mereka sendiri sendiri, sehingga setiap akun memiliki produk mereka sendiri sendiri. Pertama tama, Saya import dahulu `UserCreationForm` dan `messages` dalam `views.py`. kemudian, saya menambahkan fungsi `register`.
 
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
+    ```bash
+    def register(request):
+        form = UserCreationForm()
+
+        if request.method == "POST":
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Your account has been successfully created!')
+                return redirect('main:login')
+        context = {'form':form}
+        return render(request, 'register.html', context)
+    ```
+
+    Selanjutnya, saya juga membuat sebuah file html baru yang bernama `register.html` Ini berisi template tampilan register page pada aplikasi saya 
+
+    ```bash
+    {% extends 'base.html' %}
+
+    {% block meta %}
+    <title>Register</title>
+    {% endblock meta %}
+
+    {% block content %}
+
+    <div class="login">
+    <h1>Register</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td><input type="submit" name="submit" value="Daftar" /></td>
+        </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    </div>
+
+    {% endblock content %}
+    ```
+
+    Setelah itu, saya juga menambahkan _path url_nya ke dalam `urls.py`. Sejauh ini, saya sudah berhasil membuat ragister page. Selanjutnya, saya akan membuat fungsi login. Pertama tama, pada `views.py`, saya mengimport dahulu `authenticate`, `login`, dan `AuthenticationForm`. Kemudian, saya membuat fungsi untuk login user
+
+    ```bash
+    def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
-    context = {'form':form}
-    return render(request, 'register.html', context)
-```
+                user = form.get_user()
+                login(request, user)
+                return redirect('main:show_main')
 
-Selanjutnya, saya juga membuat sebuah file html baru yang bernama `register.html` Ini berisi template tampilan register page pada aplikasi saya 
+    else:
+        form = AuthenticationForm(request)
+    context = {'form': form}
+    return render(request, 'login.html', context)
+    ```
 
-```bash
-{% extends 'base.html' %}
+    Selanjutnya, sama dengan pembuatan page register, saya membuat juga page html untuk page login yang bernama `login.html`. tidak lupa juga saya menambahkan _path url_nya ke dalam `URL_PATTERNS` pada `urls.py`. Fungsi login sudah selesai, selanjutnya, saya akan membuat fungsi logout. Pertama tama, pada `views.py` saya mengimport `logout`. Kemudian, saya menambahkan function logout.
 
-{% block meta %}
-<title>Register</title>
-{% endblock meta %}
+    ```bash
+    def logout_user(request):
+        logout(request)
+        return redirect('main:login')
+    ```
 
-{% block content %}
+    Tidak lupa, saya menambahkan tombol logout juga di samping tombol tambah produk. Setelah itu, saya menambahkan _path url_nya ke dalam `urls.py`. Setelah selesai membuat page register, login, dan logout, saya ingin merestriksi page main agar hanya bisa dibuka dengan login terlebih dahulu. Pertama tama, pada `views.py`, saya mengimport `login_required` dan menambahkan
+    ```bash
+    @login_required(login_url='/login')
+    ```
+    diatas function `show_main`. Setelah itu, main hanya bisa dibuka juga pengguna sudah melakukan login terlebih dahulu. 
 
-<div class="login">
-  <h1>Register</h1>
+2. **Menerapkan Cookies pada halaman aplikasi**
 
-  <form method="POST">
-    {% csrf_token %}
-    <table>
-      {{ form.as_table }}
-      <tr>
-        <td></td>
-        <td><input type="submit" name="submit" value="Daftar" /></td>
-      </tr>
-    </table>
-  </form>
+    Saya ingin menggunakan _cookies_ pada web saya, yang pertama saya lakukan adalah meng-_import_ H`ttpResponseRedirect`, `reverse`, dan `datetime` pada `views.py`. Kemudian, pada function `login_user`, saya menambahkan potongan kode untuk menggunakan cookies setiap kali login untuk membuat _cookies_ last_login setiap kali user login.
 
-  {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-</div>
+    ```bash
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+    ```
 
-{% endblock content %}
-```
+    Kemudian, pada bagian `context` di function `show_main`, tambahkan juga `last_login` di dalamnya.
+    ```bash
+    context = {
+        ....
+        'last_login': request.COOKIES['last_login'],
+    }
+    ```
+    Kemudian, saya juga menambahkan 
+    ```bash
+        response.delete_cookie('last_login')
+    ```
+    pada function `logout_user` untuk menghapus _cookies_ terakhir login pada saat pengguna logout. Kemudian, aku juga menampahkan teks yang menunjukkan kapan kita terakhir login pada berkas `main.html`.
 
-Setelah itu, saya juga menambahkan _path url_nya ke dalam `urls.py`. Sejauh ini, saya sudah berhasil membuat ragister page. Selanjutnya, saya akan membuat fungsi login. Pertama tama, pada `views.py`, saya mengimport dahulu `authenticate`, `login`, dan `AuthenticationForm`. Kemudian, saya membuat fungsi untuk login user
+3. **Menghubungkan model Product dengan User**
 
-```bash
-def login_user(request):
-   if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
+    Saya ingin membuat setiap user memiliki produk yang mereka tambahkan sendiri sendiri, oleh karena itu saya ingin menghubungkan antara user dengan produk yang mereka buat masing masing. Pertama, saya mengimport `User` pada `models.py`. Kemudian, pada model Product yang sudah dibuat, saya menambahkan
 
-      if form.is_valid():
-            user = form.get_user()
-            login(request, user)
+    ```bash
+    class Product(models.Model):
+        ....
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ```
+
+    kode tersebut bertujuan untuk menghubungkan setiap produk yang dibuat dengan masing masing user. Kemudian pada `views.py`, saya juga menambahkan beberapa penambahan kode
+    ```bash
+    def create_product(request):
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
             return redirect('main:show_main')
 
-   else:
-      form = AuthenticationForm(request)
-   context = {'form': form}
-   return render(request, 'login.html', context)
-```
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+    ```
 
-Selanjutnya, sama dengan pembuatan page register, saya membuat juga page html untuk page login yang bernama `login.html`. tidak lupa juga saya menambahkan _path url_nya ke dalam `URL_PATTERNS` pada `urls.py`. Fungsi login sudah selesai, selanjutnya, saya akan membuat fungsi logout. Pertama tama, pada `views.py` saya mengimport `logout`. Kemudian, saya menambahkan function logout.
+    kode `commit=False` bertujuan supaya sistem tidak langsung menyimpan produk yang ditambahkan oleh pengguna langsung ke _database_ tetapi dilihat dahulu siapa pengguna yang login. Kemudian, pada variabel `products` di `show_main`, ubah isinya menjadi seperti ini:
 
-```bash
-def logout_user(request):
-    logout(request)
-    return redirect('main:login')
-```
+    ```bash
+    def show_main(request):
+    products = MoodEntry.objects.filter(user=request.user)
+    context = {
+         'name': request.user.username,
+    }
+    ```
 
-Tidak lupa, saya menambahkan tombol logout juga di samping tombol tambah produk. Setelah itu, saya menambahkan _path url_nya ke dalam `urls.py`. Setelah selesai membuat page register, login, dan logout, saya ingin merestriksi page main agar hanya bisa dibuka dengan login terlebih dahulu. Pertama tama, pada `views.py`, saya mengimport `login_required` dan menambahkan
-```bash
-@login_required(login_url='/login')
-```
-diatas function `show_main`. Setelah itu, main hanya bisa dibuka juga pengguna sudah melakukan login terlebih dahulu. 
+    Ini bertujuan agar program hanya mengambil product yang terhubung dengan `user` yang terhubung saja. Kemudian setelah mengubah berbagai variabel pada `models.py` tidak lupa juga saya melakukan migrations. Ketika saya melakukan migrations, maka semua produk yang telah saya buat terhapus, tetapi itu tidak apa apa karena nanti saya akan membuat produk baru. Terakhir, saya import `os` agar program saya bersiap siap untuk _environtment production_.
 
-### Menerapkan Cookies pada halaman aplikasi 
+4. **Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.**
 
+    Saya membuat 2 dummy account yang bernama `salomotes` dan `sal2'
 
 
 ### Perbedaan antara `HttpResponseRedirect()` dan `redirect()`

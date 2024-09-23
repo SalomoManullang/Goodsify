@@ -18,6 +18,8 @@ from django.urls import reverse
 def show_main(request):
     products = Product.objects.filter(user=request.user)
     context = {
+        'class': 'PBP B',   
+        'npm': '2306219745',
         'name': request.user.username,
         'Products': products,  # Ganti key menjadi 'Products' agar sesuai dengan template
         'last_login': request.COOKIES['last_login'],
