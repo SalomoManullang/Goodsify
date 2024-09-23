@@ -587,6 +587,11 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 4. **Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.**
 
     Saya membuat 2 dummy account yang bernama `salomotes` dan `sal2`
+   1. **salomotes**
+   ![image](https://github.com/user-attachments/assets/9e23f742-ab7b-4fc8-8e62-2756be4615fe)
+   2. **sal2** 
+   ![image](https://github.com/user-attachments/assets/78f131e0-3caf-4f3a-b382-8f89d89e31c1)
+
 
 
 ### Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
