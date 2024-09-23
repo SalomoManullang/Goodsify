@@ -500,10 +500,6 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 </details>
 
 
-TES TES TES
-
-
-
 
 
 
