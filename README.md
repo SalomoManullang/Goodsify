@@ -432,6 +432,97 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 <details>
   <summary></summary>
 
+### Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar.
+
+Setelah sebelumnya sudah membuat form untuk menambahkan produk yang ingin ditambahkan ke dalam aplikasi, selanjutnya saya akan membuat setiap pengguna memiliki akun mereka sendiri sendiri, sehingga setiap akun memiliki produk mereka sendiri sendiri. Pertama tama, Saya import dahulu `UserCreationForm` dan `messages` dalam `views.py`. kemudian, saya menambahkan fungsi `register`.
+
+```bash
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
+
+Selanjutnya, saya juga membuat sebuah file html baru yang bernama `register.html` Ini berisi template tampilan register page pada aplikasi saya 
+
+```bash
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Register</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="login">
+  <h1>Register</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+      <tr>
+        <td></td>
+        <td><input type="submit" name="submit" value="Daftar" /></td>
+      </tr>
+    </table>
+  </form>
+
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+{% endblock content %}
+```
+
+Setelah itu, saya juga menambahkan _path url_nya ke dalam `urls.py`. Sejauh ini, saya sudah berhasil membuat ragister page. Selanjutnya, saya akan membuat fungsi login. Pertama tama, pada `views.py`, saya mengimport dahulu `authenticate`, `login`, dan `AuthenticationForm`. Kemudian, saya membuat fungsi untuk login user
+
+```bash
+def login_user(request):
+   if request.method == 'POST':
+      form = AuthenticationForm(data=request.POST)
+
+      if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('main:show_main')
+
+   else:
+      form = AuthenticationForm(request)
+   context = {'form': form}
+   return render(request, 'login.html', context)
+```
+
+Selanjutnya, sama dengan pembuatan page register, saya membuat juga page html untuk page login yang bernama `login.html`. tidak lupa juga saya menambahkan _path url_nya ke dalam `URL_PATTERNS` pada `urls.py`. Fungsi login sudah selesai, selanjutnya, saya akan membuat fungsi logout. Pertama tama, pada `views.py` saya mengimport `logout`. Kemudian, saya menambahkan function logout.
+
+```bash
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+
+Tidak lupa, saya menambahkan tombol logout juga di samping tombol tambah produk. Setelah itu, saya menambahkan _path url_nya ke dalam `urls.py`. Setelah selesai membuat page register, login, dan logout, saya ingin merestriksi page main agar hanya bisa dibuka dengan login terlebih dahulu. Pertama tama, pada `views.py`, saya mengimport `login_required` dan menambahkan
+```bash
+@login_required(login_url='/login')
+```
+diatas function `show_main`. Setelah itu, main hanya bisa dibuka juga pengguna sudah melakukan login terlebih dahulu. 
+
+### Menerapkan Cookies pada halaman aplikasi 
+
+
+
 ### Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
 
 `HttpResponseRedirect()` adalah kelas di Django yang digunakan untuk mengarahkan pengguna menuju URL tertentu. kalian harus memberikan URL valid dan lengkap sebagai argumen. Misalnya, untuk mengarahkan ke `/some/url/`, kalian harus menggunakan `HttpResponseRedirect('/some/url/')`. Di sini, kalian perlu mengatur URL secara manual.
