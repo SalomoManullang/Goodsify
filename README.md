@@ -5,6 +5,7 @@
 **link** : http://salomo-immanuel-goodsify.pbp.cs.ui.ac.id **(harus dibuka di incognito)**
 
 # TUGAS 2: Implementasi Model-View-Template (MVT) pada Django
+================================================================
 
 <details>
   <summary></summary>
@@ -193,6 +194,7 @@ ORM (Object-Relational Mapping) adalah teknik dalam pengembangan perangkat lunak
 
 
 # TUGAS 3: Implementasi Form dan Data Delivery pada Django
+===================================================================
 
 <details>
   <summary></summary>
@@ -428,6 +430,7 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 </details>
 
 # TUGAS 4: Implementasi Autentikasi, Session, dan Cookies pada Django
+===============================================================================
 
 <details>
   <summary></summary>
