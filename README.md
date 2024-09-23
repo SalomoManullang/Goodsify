@@ -587,14 +587,13 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 4. **Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.**
 
     Saya membuat 2 dummy account yang bernama `salomotes` dan `sal2`
-   1. **salomotes**
+   1) **salomotes**
 
    ![image](https://github.com/user-attachments/assets/9e23f742-ab7b-4fc8-8e62-2756be4615fe)
 
-   2. **sal2** 
-   
-   ![image](https://github.com/user-attachments/assets/78f131e0-3caf-4f3a-b382-8f89d89e31c1)
+   2) **sal2** 
 
+   ![image](https://github.com/user-attachments/assets/78f131e0-3caf-4f3a-b382-8f89d89e31c1)
 
 
 ### Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
@@ -620,6 +619,38 @@ def my_view(request):
 kesimpulannya, `redirect()` adalah cara yang lebih sederhana dan fleksibel untuk melakukan pengalihan (redirect) di Django dibandingkan dengan `HttpResponseRedirect()`. Dengan menggunakan `redirect()`, kalian dapat memberikan berbagai jenis argumen seperti URL, nama tampilan, atau objek model. Django akan secara otomatis mengonversi argumen tersebut ke URL yang benar, sehingga Anda tidak perlu mengelola pembuatan URL secara manual.
 
 ### Cara kerja penghubungan model Product dengan User
+
+Penghubungan model `Product` dengan model `User` di Django dilakukan menggunakan relasi **ForeignKey**. Ini berarti setiap objek Product dapat dihubungkan dengan satu user tertentu yang menciptakannya. Relasi ini memungkinkan kita untuk mengasosiasikan produk dengan `user` tertentu sehingga setiap produk yang ditambahkan atau dimodifikasi dapat diatur berdasarkan `user`.
+
+misalnya pada kode ini
+```bash
+from django.contrib.auth.models import User
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.IntegerField()
+    description = models.TextField()
+    rating = models.PositiveSmallIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+```
+
+`ForeignKey(User)`: Menghubungkan produk ke `user`.
+`on_delete=models.CASCADE`: Jika `user` dihapus, produk yang terkait juga dihapus.
+
+Kemudian, sistem juga menyimpan produk yang terikat dengan `user`
+```bash
+product.user = request.user
+```
+kode ini mengasosiasikan produk yang sedang dibuat dengan user yang sedang login. Sistem juga hanya menampilkan produk yang telah dibuat oleh `user`
+
+```bash
+def show_main(request):
+    products = Product.objects.filter(user=request.user)  # Filter berdasarkan user
+    return render(request, "main.html", {'Products': products})
+```
+
+`Product.objects.filter(user=request.user)`: kode ini memfilter produk yang hanya dimiliki oleh user yang sedang login. Produk milik user lain tidak akan ditampilkan.
 
 
 ### perbedaan antara _authentication_ dan _authorization_ dan cara django mengimplementasikannya
