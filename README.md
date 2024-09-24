@@ -593,7 +593,7 @@ Penyerang bisa memanfaatkan celah keamanan ini dengan membuat sebuah halaman ber
 
    2) **sal2** 
 
-   ![image](https://github.com/user-attachments/assets/78f131e0-3caf-4f3a-b382-8f89d89e31c1)
+   ![image](https://github.com/user-attachments/assets/2493a811-9bf5-42fc-921f-694429569418)
 
 
 ### Perbedaan antara `HttpResponseRedirect()` dan `redirect()`
