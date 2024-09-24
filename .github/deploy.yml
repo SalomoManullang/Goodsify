@@ -8,7 +8,7 @@ on:
   pull_request:
     branches: [ master ]
     paths-ignore:
-        - '**.md'
+        - '**.md' ##
 
 jobs:
   build-and-push:
