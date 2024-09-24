@@ -1,7 +1,7 @@
 name: Push to PWS
 
 on:
-  push:
+  push:git config core.ignorecase false
     branches: [ master ]
     paths-ignore:
         - '**.md'
