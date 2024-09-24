@@ -22,7 +22,7 @@ def show_main(request):
         'npm': '2306219745',
         'name': request.user.username,
         'Products': products,  # Ganti key menjadi 'Products' agar sesuai dengan template
-        'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login', 'Tidak ada data login sebelumnya'),
     }
 
     return render(request, "main.html", context)
