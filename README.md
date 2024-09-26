@@ -696,6 +696,240 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 </details>
 
 
+# TUGAS 4: Desain Web menggunakan HTML, CSS dan Framework CSS
+
+<details>
+  <summary></summary>
+
+### urutan prioritas pengambilan CSS selector 
+
+Berikut ini adalah tingkatan prioritas CSS Selector dari yang paling rendah ke paling tinggi (no 1 dijalankan paling terakhir):
+
+1. **Selector tipe elemen (Type Selector):**
+    elektor ini langsung mengacu pada nama elemen HTML, seperti `div`, `p`, `h1`, dan sebagainya. Ini memiliki prioritas yang paling rendah.
+
+2. **Selector kelas (Class Selector):**
+    Selektor ini menggunakan tanda titik `(.)` diikuti dengan nama kelas, seperti `.menu`, `.header`, dan sebagainya. Prioritasnya lebih tinggi dibandingkan selektor tipe elemen.
+
+3. **Selector atribut (Attribute Selector):**
+    Selektor ini mengacu pada atribut tertentu dalam elemen HTML, seperti `[type="text"]`. Ini memiliki prioritas yang sama dengan kelas.
+
+4. **Selector ID (ID Selector):**
+    Selektor ini menggunakan tanda pagar `(#)` diikuti dengan nama ID, seperti `#header`. Prioritasnya lebih tinggi dari kelas atau atribut.
+
+5. **Selector inline (Inline Style):**
+    Jika gaya diterapkan langsung ke elemen HTML menggunakan atribut `style`, seperti `<div style="color: red;">`. Ini memiliki prioritas yang sangat tinggi.
+
+6. **Penting (Important):**
+    Aturan CSS yang memiliki deklarasi `!important`, seperti` color: red` `!important;`, akan mengesampingkan semua aturan lain, kecuali ada deklarasi `!important` lain dengan spesifisitas yang lebih tinggi.
+  
+
+### Alasan _responsive design_ penting dan contoh aplikasi yang sudah dan belum menerapkannya
+
+_Responsive design_ penting dalam pengembangan aplikasi web karena semakin beragamnya perangkat yang digunakan untuk mengakses situs atau aplikasi web. Pengguna menjadi bisa mengakses konten web tidak hanya dari komputer desktop, tetapi juga dari tablet, smartphone, hingga perangkat lain dengan berbagai ukuran layar. Berikut ini alasan _responsive design_ penting:
+
+1. **Pengalaman Pengguna yang Konsisten**  
+Responsive design memastikan tampilan dan fungsionalitas situs tetap nyaman di berbagai perangkat, sehingga pengguna tidak terganggu oleh masalah layout atau navigasi.
+
+2. **Mengurangi Bounce Rate**  
+
+    Situs yang responsif lebih mudah dinavigasi di perangkat seluler, sehingga pengunjung cenderung tinggal lebih lama di situs.
+
+3. **Meningkatkan SEO**  
+    Google mengutamakan situs responsif dalam hasil pencarian, khususnya di perangkat mobile.
+
+4. **Efisiensi Pengembangan**  
+    Dengan responsive design, cukup satu versi situs yang bekerja di berbagai perangkat, sehingga lebih efisien dalam pengembangan dan pemeliharaan.
+
+5. **Siap untuk Teknologi Baru**  
+    Responsive design membuat situs mudah beradaptasi dengan perangkat baru tanpa perubahan besar.
+
+**Aplikasi yang menggunakan _responsive design_:**
+    1. Whatsapp
+    2. Discord
+    3. Spotify
+
+**Aplikasi yang belum menggunakan _responsive design_
+    1. Craiglist
+    2. DJP online
+    3. SIMPKB
 
 
+### perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiganya
 
+1. **Margin**
+
+    Margin adalah ruang di luar elemen yang memisahkan elemen tersebut dengan elemen lain di sekitarnya. Margin mempengaruhi jarak antar elemen di luar batas elemen tersebut. Margin dapat diatur secara individual untuk setiap sisi (atas, kanan, bawah, kiri) atau sekaligus.
+
+    ```bash
+        div {
+    margin: 10px; /* Semua sisi akan memiliki margin 10px */
+    }
+
+    div {
+    margin-top: 10px; /* Hanya bagian atas yang memiliki margin 10px */
+    margin-right: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    }
+    ```
+
+2. **Border**
+
+    Border adalah garis di sekitar elemen yang membentuk batas luar elemen. Border ini dapat memiliki berbagai ketebalan, warna, dan gaya (misalnya, solid, dashed, atau dotted).Border dapat diatur untuk satu atau semua sisi elemen.
+
+    ```bash
+    div {
+    border: 2px solid black; /* Border hitam dengan ketebalan 2px */
+    }
+
+    div {
+    border-top: 1px dashed red; /* Hanya border atas yang berwarna merah dengan gaya dashed */
+    }
+    ```
+
+3. **Padding**
+    Padding adalah ruang di dalam elemen yang memisahkan konten elemen dari border. Padding membuat jarak antara konten elemen (seperti teks atau gambar) dengan batas elemen. Padding juga dapat diatur untuk setiap sisi atau secara keseluruhan.
+
+    ```bash
+    div {
+    padding: 15px; /* Padding 15px untuk semua sisi */
+    }
+
+    div {
+    padding-top: 10px; /* Padding untuk sisi atas */
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    }
+    ```
+
+### flex box dan grid layout beserta kegunaannya
+
+1. **Flex box (Flexible Box Layout)**
+    Flexbox adalah metode layout CSS yang digunakan untuk mengatur elemen secara dinamis dalam baris atau kolom. Flexbox memungkinkan kita untuk mengubah ukuran dan posisi antar elemen secara fleksibel. Flexbox sangat berguna untuk membuat layout yang fleksibel, seperti menyejajarkan elemen secara horizontal atau vertikal, membuat elemen memiliki ukuran dinamis, dan mendistribusikan elemen dengan mudah di dalam suatu kontainer.
+
+    Contoh Implementasinya :
+    ```bash
+    .container {
+    display: flex; /* Mengaktifkan flexbox */
+    justify-content: center; /* Menyejajarkan elemen secara horizontal ke tengah */
+    align-items: center; /* Menyejajarkan elemen secara vertikal ke tengah */
+    }
+
+    .item {
+    flex: 1; /* Elemen akan fleksibel dan mengisi ruang yang tersedia */
+    }
+    ```
+
+    **Kegunaan Flexbox**
+
+    1. **Membuat menu atau navigasi**
+
+        ```bash
+        <style>
+        .menu {
+            display: flex; /* Aktifkan flexbox */
+            list-style: none; /* Hilangkan bullet points pada list */
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            margin: 0 15px; /* Beri jarak antar item menu */
+        }
+        </style>
+        ```
+
+    2. **Mengatur ukuran dan posisi elemen**
+
+        ```bash
+        .container {
+            display: flex; /* Aktifkan flexbox */
+            justify-content: center; /* Pusatkan secara horizontal */
+            align-items: center; /* Pusatkan secara vertikal */
+            height: 100vh; /* Tinggi penuh halaman */
+        }
+        ```
+
+    3. **Mengurutkan Elemen**
+
+    ```bash
+    <div class="flex-order">
+    <div class="item" style="order: 3;">Item 1</div>
+    <div class="item" style="order: 1;">Item 2</div>
+    <div class="item" style="order: 2;">Item 3</div>
+    </div>
+    ```
+
+    4. **Menjadikan Elemen Fleksibel**
+
+    ```bash
+    <div class="flex-grow">
+    <div class="grow-item" style="flex-grow: 2;">Item 1</div>
+    <div class="grow-item" style="flex-grow: 1;">Item 2</div>
+    </div>
+    ```
+
+2. **Grid Layout**
+
+    Grid layout adalah sistem tata letak dua dimensi yang memungkinkan pembuatan grid yang terdiri dari baris dan kolom. Grid layout memungkinkan pengaturan elemen lebih kompleks dibandingkan dengan flexbox, karena  dapat mengatur elemen dalam bentuk kisi. Grid layout sangat cocok untuk membuat desain yang lebih kompleks, seperti layout halaman penuh, di mana kalian perlu membagi halaman menjadi beberapa bagian (header, sidebar, konten utama, footer) dengan presisi yang lebih baik.
+
+    **Kegunaan Grid Layout**
+
+    1. **Membuat Tata Letak Dua Dimensi (Baris dan Kolom)**
+
+        ```bash
+        <div class="grid-container">
+        <header class="header">Header</header>
+        <nav class="sidebar">Sidebar</nav>
+        <main class="content">Main Content</main>
+        <footer class="footer">Footer</footer>
+        </div>
+
+        <style>
+        .grid-container {
+            ...
+        }
+
+        .header, .footer {
+            ...
+        }
+
+        .sidebar {
+            ...
+        }
+
+        .content {
+            ...
+        }
+        </style>
+        ```
+    
+    2. **Mengatur Posisi Elemen Secara Presisi**
+
+        ```bash
+        <div class="grid-container">
+        <div class="item1">Item 1</div>
+        </div>
+
+        <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 100px 100px;
+            grid-gap: 10px;
+        }
+
+        .item1 {
+            grid-column: 1 / 3; /* Item 1 akan membentang dua kolom */
+            background-color: lightblue;
+        }
+
+        </style>
+
+        ```
+    
+    3. **
+
+</details>
