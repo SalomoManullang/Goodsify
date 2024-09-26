@@ -706,21 +706,27 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 Berikut ini adalah tingkatan prioritas CSS Selector dari yang paling rendah ke paling tinggi (no 1 dijalankan paling terakhir):
 
 1. **Selector tipe elemen (Type Selector):**
+
     elektor ini langsung mengacu pada nama elemen HTML, seperti `div`, `p`, `h1`, dan sebagainya. Ini memiliki prioritas yang paling rendah.
 
 2. **Selector kelas (Class Selector):**
+
     Selektor ini menggunakan tanda titik `(.)` diikuti dengan nama kelas, seperti `.menu`, `.header`, dan sebagainya. Prioritasnya lebih tinggi dibandingkan selektor tipe elemen.
 
 3. **Selector atribut (Attribute Selector):**
+
     Selektor ini mengacu pada atribut tertentu dalam elemen HTML, seperti `[type="text"]`. Ini memiliki prioritas yang sama dengan kelas.
 
 4. **Selector ID (ID Selector):**
+
     Selektor ini menggunakan tanda pagar `(#)` diikuti dengan nama ID, seperti `#header`. Prioritasnya lebih tinggi dari kelas atau atribut.
 
 5. **Selector inline (Inline Style):**
+
     Jika gaya diterapkan langsung ke elemen HTML menggunakan atribut `style`, seperti `<div style="color: red;">`. Ini memiliki prioritas yang sangat tinggi.
 
 6. **Penting (Important):**
+
     Aturan CSS yang memiliki deklarasi `!important`, seperti` color: red` `!important;`, akan mengesampingkan semua aturan lain, kecuali ada deklarasi `!important` lain dengan spesifisitas yang lebih tinggi.
   
 
@@ -746,17 +752,13 @@ _Responsive design_ penting dalam pengembangan aplikasi web karena semakin berag
 **Aplikasi yang menggunakan _responsive design_:**
 
     1. Whatsapp
-
     2. Discord
-
     3. Spotify
 
 **Aplikasi yang belum menggunakan _responsive design_**
 
     1. Craiglist
-
     2. DJP online
-
     3. SIMPKB
 
 
@@ -830,52 +832,12 @@ _Responsive design_ penting dalam pengembangan aplikasi web karena semakin berag
 
     **Kegunaan Flexbox**
 
-    1. **Membuat menu atau navigasi**
-
-        ```bash
-        <style>
-        .menu {
-            display: flex; /* Aktifkan flexbox */
-            list-style: none; /* Hilangkan bullet points pada list */
-            padding: 0;
-            margin: 0;
-        }
-
-        .menu li {
-            margin: 0 15px; /* Beri jarak antar item menu */
-        }
-        </style>
-        ```
-
-    2. **Mengatur ukuran dan posisi elemen**
-
-        ```bash
-        .container {
-            display: flex; /* Aktifkan flexbox */
-            justify-content: center; /* Pusatkan secara horizontal */
-            align-items: center; /* Pusatkan secara vertikal */
-            height: 100vh; /* Tinggi penuh halaman */
-        }
-        ```
-
-    3. **Mengurutkan Elemen**
-
-    ```bash
-    <div class="flex-order">
-    <div class="item" style="order: 3;">Item 1</div>
-    <div class="item" style="order: 1;">Item 2</div>
-    <div class="item" style="order: 2;">Item 3</div>
-    </div>
-    ```
-
-    4. **Menjadikan Elemen Fleksibel**
-
-    ```bash
-    <div class="flex-grow">
-    <div class="grow-item" style="flex-grow: 2;">Item 1</div>
-    <div class="grow-item" style="flex-grow: 1;">Item 2</div>
-    </div>
-    ```
+    1. Membuat menu atau navigasi
+    2. Mengatur ukuran dan posisi elemen
+    3. Mengurutkan Elemen
+    4. Menjadikan Elemen Fleksibel
+    5. Membuat tata letak kolom yang responsif
+    6. Membuat grid sederhana
 
 2. **Grid Layout**
 
@@ -883,59 +845,25 @@ _Responsive design_ penting dalam pengembangan aplikasi web karena semakin berag
 
     **Kegunaan Grid Layout**
 
-    1. **Membuat Tata Letak Dua Dimensi (Baris dan Kolom)**
+    1. Membuat tata letak dua dimensi (Baris dan Kolom)
+    2. Mengatur posisi elemen secara presisi
+    3. Membangun layout responsif
+    4. Membuat design yang konsisten
+    5. Mengatur ukuran kolom dan baris
+    6. Membuat galeri atau dashboard
 
-        ```bash
-        <div class="grid-container">
-        <header class="header">Header</header>
-        <nav class="sidebar">Sidebar</nav>
-        <main class="content">Main Content</main>
-        <footer class="footer">Footer</footer>
-        </div>
-
-        <style>
-        .grid-container {
-            ...
-        }
-
-        .header, .footer {
-            ...
-        }
-
-        .sidebar {
-            ...
-        }
-
-        .content {
-            ...
-        }
-        </style>
-        ```
+    **Perbedaan Layout Grid dan Flexbox**
     
-    2. **Mengatur Posisi Elemen Secara Presisi**
+    | Aspek                     | Grid Layout                                                                 | Flexbox                                                              |
+    |---------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------|
+    | **Dimensi**                | Dua dimensi (baris dan kolom)                                                | Satu dimensi (baris atau kolom)                                       |
+    | **Penggunaan Utama**       | Tata letak yang lebih kompleks (misalnya halaman penuh, dashboard)           | Tata letak elemen yang fleksibel dan sederhana                        |
+    | **Penempatan Elemen**      | Posisi elemen dapat ditempatkan secara presisi di grid                       | Elemen disusun secara otomatis dalam satu arah (horizontal atau vertikal) |
+    | **Responsif**              | Responsif, tetapi pengaturan lebih manual dibanding flexbox                  | Sangat responsif, mudah beradaptasi dengan berbagai ukuran layar       |
+    | **Sederhana atau Kompleks**| Kompleks dan fleksibel untuk tata letak yang presisi                        | Sederhana untuk tata letak elemen dinamis dan fleksibel               |
+    | **Penataan Elemen**        | Menata elemen dalam bentuk grid yang presisi                                | Menata elemen secara otomatis dalam satu baris atau kolom             |
+    | **Kegunaan Utama**         | Membagi area halaman dengan struktur grid yang teratur                      | Menata elemen dalam satu dimensi secara fleksibel                     |
 
-        ```bash
-        <div class="grid-container">
-        <div class="item1">Item 1</div>
-        </div>
 
-        <style>
-        .grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 100px 100px;
-            grid-gap: 10px;
-        }
-
-        .item1 {
-            grid-column: 1 / 3; /* Item 1 akan membentang dua kolom */
-            background-color: lightblue;
-        }
-
-        </style>
-
-        ```
-    
-    3. **
 
 </details>
