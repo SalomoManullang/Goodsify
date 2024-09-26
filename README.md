@@ -729,10 +729,9 @@ Berikut ini adalah tingkatan prioritas CSS Selector dari yang paling rendah ke p
 _Responsive design_ penting dalam pengembangan aplikasi web karena semakin beragamnya perangkat yang digunakan untuk mengakses situs atau aplikasi web. Pengguna menjadi bisa mengakses konten web tidak hanya dari komputer desktop, tetapi juga dari tablet, smartphone, hingga perangkat lain dengan berbagai ukuran layar. Berikut ini alasan _responsive design_ penting:
 
 1. **Pengalaman Pengguna yang Konsisten**  
-Responsive design memastikan tampilan dan fungsionalitas situs tetap nyaman di berbagai perangkat, sehingga pengguna tidak terganggu oleh masalah layout atau navigasi.
+    Responsive design memastikan tampilan dan fungsionalitas situs tetap nyaman di berbagai perangkat, sehingga pengguna tidak terganggu oleh masalah layout atau navigasi.
 
 2. **Mengurangi Bounce Rate**  
-
     Situs yang responsif lebih mudah dinavigasi di perangkat seluler, sehingga pengunjung cenderung tinggal lebih lama di situs.
 
 3. **Meningkatkan SEO**  
@@ -745,13 +744,19 @@ Responsive design memastikan tampilan dan fungsionalitas situs tetap nyaman di b
     Responsive design membuat situs mudah beradaptasi dengan perangkat baru tanpa perubahan besar.
 
 **Aplikasi yang menggunakan _responsive design_:**
+
     1. Whatsapp
+
     2. Discord
+
     3. Spotify
 
-**Aplikasi yang belum menggunakan _responsive design_
+**Aplikasi yang belum menggunakan _responsive design_**
+
     1. Craiglist
+
     2. DJP online
+
     3. SIMPKB
 
 
@@ -789,6 +794,7 @@ Responsive design memastikan tampilan dan fungsionalitas situs tetap nyaman di b
     ```
 
 3. **Padding**
+
     Padding adalah ruang di dalam elemen yang memisahkan konten elemen dari border. Padding membuat jarak antara konten elemen (seperti teks atau gambar) dengan batas elemen. Padding juga dapat diatur untuk setiap sisi atau secara keseluruhan.
 
     ```bash
