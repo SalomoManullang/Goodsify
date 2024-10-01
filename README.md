@@ -845,7 +845,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
     dengan menggunakan viewport, maka ketika web di perkecil hingga seukuran HP, maka navigation bar dapat mengecil dan menampilkan menu hamburger.
 
-![image](https://github.com/user-attachments/assets/8862eeb4-d433-4665-9c2d-1d57a8f5e0e9)
+![image](https://github.com/user-attachments/assets/1ce3412d-f167-4c06-824c-e2f79a28d6cf)
 
 
 3. **Menampilkan Produk**
