@@ -750,7 +750,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
     Untuk menghias website saya sendiri, saya menggunakan _tailwind_ karena dengan _tailwind_, ada beberapa tampilan yang sudah tersedia seperti icon panah, tong sampah, pensil, dan lainnya. Setelah menemukan _UI_ yang bagus untuk _login page_ saya, saya tinggal menerapkan _style_ yang sama pada _register page_ nya. 
 
-    (INI GAMBAR)
+![image](https://github.com/user-attachments/assets/5598d8fb-7e8c-49db-8430-d2a42064010e)
 
     Sesuai gambar tersebut, saya menggunakan foto dan _vibe_ putih hijau, _style_ ini pun juga ku implementasikan pada fitur edit dan tambah produk. Ada fitur tambahan juga yang ku tambahkan, yaitu tombol kembali untuk kembali ke _main page_ :
 
@@ -844,7 +844,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
     dengan menggunakan viewport, maka ketika web di perkecil hingga seukuran HP, maka navigation bar dapat mengecil dan menampilkan menu hamburger.
 
-    [gambar]
+  ![image](https://github.com/user-attachments/assets/8862eeb4-d433-4665-9c2d-1d57a8f5e0e9)
 
 3. **Menampilkan Produk**
 
@@ -939,6 +939,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
     </div>
 
     ```
+    ![image](https://github.com/user-attachments/assets/1e4673d1-16cb-44ea-b94d-70632d7dd21b)
 
 
 ### urutan prioritas pengambilan CSS selector 
