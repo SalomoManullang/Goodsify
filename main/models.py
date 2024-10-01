@@ -13,6 +13,11 @@ class Product(models.Model):
         MinValueValidator(1),
         MaxValueValidator(5)])
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    stok = models.IntegerField()
+    image_url = models.URLField(max_length=500, null=True, blank=True)  # Menyimpan URL gambar
+    city = models.CharField(max_length=100)  # Tambahkan field city
+
+
 
 def __str__(self):
     return self.name

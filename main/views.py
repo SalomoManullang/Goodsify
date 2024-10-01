@@ -1,8 +1,7 @@
-from django.shortcuts import render
-from django.shortcuts import render, redirect   # Tambahkan import redirect di baris ini
+from django.shortcuts import render, redirect , reverse  # Tambahkan import redirect di baris ini
 from main.forms import ProductForm
 from main.models import Product
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -11,7 +10,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 @login_required(login_url='/login')
@@ -21,7 +19,7 @@ def show_main(request):
         'class': 'PBP B',   
         'npm': '2306219745',
         'name': request.user.username,
-        'Products': products,  # Ganti key menjadi 'Products' agar sesuai dengan template
+        'Products': products,  
         'last_login': request.COOKIES.get('last_login', 'Tidak ada data login sebelumnya'),
     }
 
@@ -89,4 +87,18 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_produk(request, id):
+    produk = Product.objects.get(pk = id)
+    form = ProductForm(request.POST or None, instance=produk)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    produk = Product.objects.get(pk = id)
+    produk.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
 

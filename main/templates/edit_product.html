@@ -2,13 +2,13 @@
 {% load static %}
 
 {% block meta %}
-<title>Create Product</title>
+<title>Edit Produk</title>
 {% endblock meta %}
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('https://wpcms.kanggo.id/wp-content/uploads/2022/06/20220605-8-Jenis-Cat-Tembok-Warna-Hijau-Menawan-dan-Kombinasinya-01.jpg');">
     <div class="bg-white bg-opacity-70 rounded-lg shadow-lg p-16 w-[500px]">
-        <h2 class="text-center text-3xl font-bold text-green-600 mb-6">Create Product</h2>
+        <h2 class="text-center text-3xl font-bold text-green-600 mb-6">Edit Produk</h2>
         
         <!-- Tombol kembali ke halaman utama -->
         <div class="absolute top-4 left-4">
@@ -21,25 +21,24 @@
             </a>
         </div>
         
-        <!-- Form untuk membuat produk baru -->
-        <form method="POST" class="space-y-6">
+        <form method="POST" class="space-y-6"> <!-- Menambahkan space antar elemen -->
             {% csrf_token %}
             
             {% for field in form %}
-            <div class="mb-4">
+            <div class="mb-4"> <!-- Kurangi margin antar elemen -->
                 <label for="{{ field.id_for_label }}" class="block text-green-600 font-semibold">{{ field.label }}</label>
                 
                 {% if field.name == 'description' %}
-                <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-textarea block w-full p-3 h-28 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">{{ field.value|default_if_none:'' }}</textarea>
+                <textarea name="{{ field.name }}" id="{{ field.id_for_label }}" class="form-textarea block w-full p-3 h-28 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500">{{ field.value }}</textarea>
                 {% elif field.name == 'image_url' %}
                 <input type="url" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default_if_none:'' }}" class="form-input block w-full p-3 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" placeholder="Masukkan URL gambar produk"/>
                 {% else %}
-                <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value|default_if_none:'' }}" class="form-input block w-full p-3 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" />
+                <input type="{{ field.field.widget.input_type }}" name="{{ field.name }}" id="{{ field.id_for_label }}" value="{{ field.value }}" class="form-input block w-full p-3 border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500" />
                 {% endif %}
             </div>
             {% endfor %}
 
-            <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out text-lg font-semibold">Create Product</button>
+            <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-300 ease-in-out text-lg font-semibold">Edit Produk</button>
         </form>
     </div>
 </div>

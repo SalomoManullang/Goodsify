@@ -701,6 +701,246 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 <details>
   <summary></summary>
 
+### cara mengimplementasikan _Checklist_ tugas
+
+
+1. **Membuat fungsi untuk menghapus dan mengedit product**
+
+    Setelah kemarin mengatur cookies website, sekarang saya ingin menambahkan fitur untuk dapat mengahpus dan mengedit produk yang telah ditambahkan ke dalam Goodsify. Pertama tama, saya ingin membuat fitur `edit_mood`. Pertama tama, pada `views.py` saya  import `reverse` dan  `HttpResponseRedirect` kemudian saya juga menambahkan method `edit_produk`. 
+    
+    ```bash
+    def edit_produk(request, id):
+    produk = Product.objects.get(pk = id)
+    form = ProductForm(request.POST or None, instance=produk)
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+    ```
+
+    function `edit_produk` bekerja dengan membuat user kembali mengisi form lalu sistem akan _reverse_ informasi yang sebelumnya sudah ada lalu diganti dengan yang baru. Setelah itu saya juga membuat page html baru yang bernama `edit_produk.html`. pada html ini, sistem akan menunjukkan form sebagai tabel, jadi kita memasukkan kembali input yang ingin kita ubah. Setelah itu saya menghubungkan juga path nya lewat `urls.py`. Terakhir, pada `main.html`, saya menambahkan tombol edit produk. 
+
+    Setelah membuat fitur edit produk, saya lanjut membuat fitur hapus produk. Pertama tama, pada `views.py` saya menambahkan method `edit_produk`. 
+
+    ```bash
+    def delete_product(request, id):
+        produk = Product.objects.get(pk = id)
+        produk.delete()
+        return HttpResponseRedirect(reverse('main:show_main'))
+    ```
+
+    fitur `edit_produk` ini bekerja dengan cara mencari id produk yang dipilih, lalu menghapus id tersebut. Setelah itu saya juga membuat page html baru yang bernama `delete_product.html`.  Setelah itu saya menghubungkan juga path nya lewat `urls.py`. Terakhir, pada `main.html`, saya menambahkan tombol hapus produk. 
+
+
+2. **Kostumisasi halaman _login_, _register_, _Navigation bar_, edit produk, dan tambah produk agar lebih menarik**
+
+    Agar aplikasi saya terlihat menjadi lebih menarik, saya mulai untuk memperbagus halaman utama dari aplikasi ku terlebih dahulu, terutama _login_ dan _register_ Untuk aplikasi saya, saya ingin menggunakan _vibe_ hijau dan putih, oleh karena itu untuk _login page_, saya mencari gambar furniture dan hiasan no _WaterMark_ dari internet, kemudian saya jadikan sebagai background. Namun, sebelum memulai, saya perlu untuk menambahkan _tailwind_ ke dalam html saya.
+
+    ```bash 
+    <head>
+    {% block meta %}
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% endblock meta %}
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    </head>
+    ```
+
+    Untuk menghias website saya sendiri, saya menggunakan _tailwind_ karena dengan _tailwind_, ada beberapa tampilan yang sudah tersedia seperti icon panah, tong sampah, pensil, dan lainnya. Setelah menemukan _UI_ yang bagus untuk _login page_ saya, saya tinggal menerapkan _style_ yang sama pada _register page_ nya. 
+
+    (INI GAMBAR)
+
+    Sesuai gambar tersebut, saya menggunakan foto dan _vibe_ putih hijau, _style_ ini pun juga ku implementasikan pada fitur edit dan tambah produk. Ada fitur tambahan juga yang ku tambahkan, yaitu tombol kembali untuk kembali ke _main page_ :
+
+    ```bash 
+            <div class="absolute top-4 left-4">
+            <a href="{% url 'main:main' %}" class="text-green-600 hover:text-green-700 transition">
+                <div class="rounded-full bg-white p-2 shadow-lg"> <!-- Tambahkan highlight putih -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 19l-7-7 7-7" /> <!-- Garis lebih tebal stroke-width="4" -->
+                    </svg>
+                </div>
+            </a>
+        </div>
+    ```
+
+    dengan kode diatas, aku membuat tombol panah kembali di bagian kiri atas buat dan edit produk untuk kembali ke _main page_. Setelah itu, saya lanjut untuk membuat _Navigation bar_ pada atas aplikasi.  
+    
+    <details>
+    <summary>kode Navigation Bar</summary>
+
+    ```bash 
+        <nav class="bg-green-600 shadow-lg fixed top-0 left-0 z-40 w-full">
+    <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 h-16">
+        
+        <!-- Bagian kiri: Logo dan Nama Goodsify -->
+        <div class="flex items-center space-x-4">
+        <a href="#">
+            <img src="https://i.ibb.co/xCD2HDR/Whats-App-Image-2024-10-01-at-11-23-06-37c90e89-removebg-preview.png" alt="Goodsify Logo" class="h-12 w-12 mr-1">
+        </a>
+        <h1 class="text-3xl font-bold text-white">Goodsify</h1>
+        </div>
+
+        <!-- Tombol Hamburger untuk mobile -->
+        <button class="md:hidden block text-white focus:outline-none mobile-menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        </button>
+
+        <!-- Bagian tengah: Links lainnya (hanya tampil di desktop) -->
+        <div class="hidden md:flex items-center space-x-8 flex-grow justify-center">
+        <a href="#" class="text-white font-bold hover:text-gray-300">Cart</a>
+        <a href="#" class="text-white font-bold hover:text-gray-300">Contact</a>
+        <a href="#" class="text-white font-bold hover:text-gray-300">Download Goodsify App</a>
+        <a href="#" class="text-white font-bold hover:text-gray-300">About</a>
+        </div>
+
+        <!-- Bagian kanan: Logout -->
+        <div class="hidden md:flex items-center space-x-4">
+        <a href="{% url 'main:logout' %}" class="text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Logout
+        </a>
+        </div>
+        
+    </div>
+
+    <!-- Mobile menu (disembunyikan secara default) -->
+    <div class="mobile-menu hidden md:hidden flex flex-col space-y-2 px-4 py-2 bg-green-600">
+        <a href="#" class="block text-white font-bold hover:text-gray-300">Cart</a>
+        <a href="#" class="block text-white font-bold hover:text-gray-300">Contact</a>
+        <a href="#" class="block text-white font-bold hover:text-gray-300">Download Goodsify App</a>
+        <a href="#" class="block text-white font-bold hover:text-gray-300">About</a>
+        <a href="{% url 'main:logout' %}" class="block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+        Logout
+        </a>
+    </div>
+
+    <script>
+        const btn = document.querySelector(".mobile-menu-button");
+        const menu = document.querySelector(".mobile-menu");
+
+        btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+        });
+    </script>
+    </nav>
+
+    ```
+    </details>
+
+    Kemudian, saya juga menambahkan _viewport_ agar webnya menjadi responsif pada _mobile_ dan _desktop_. 
+
+    ```bash
+    <head>
+        {% block meta %}
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock meta %}
+    </head>
+    ```
+
+    dengan menggunakan viewport, maka ketika web di perkecil hingga seukuran HP, maka navigation bar dapat mengecil dan menampilkan menu hamburger.
+
+    [gambar]
+
+3. **Menampilkan Produk**
+
+    Untuk menampilkan produk, saya menggunakan 2 file html, yaitu `main.html` dan `card_product.html`. Pertama tama, saya membuat file `card_product.html` terlebih dahulu. `card_product` ini berisi informasi terkait _models_ yang ada di produk yang saya buat seperti nama, deskripsi, harga, dan lain lain.
+
+    <details>
+    <summary>kode card_product</summary>
+
+    ```bash
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-4"> <!-- Hapus w-64 untuk fleksibilitas lebar -->
+    <!-- Menampilkan Gambar dari URL -->
+    <div class="bg-gray-200 h-48 flex items-center justify-center">
+        {% if Product.image_url %}
+        <img src="{{ Product.image_url }}" alt="{{ Product.name }}" class="object-cover h-full w-full">
+        {% else %}
+        <div class="w-full h-full bg-gray-300"></div> <!-- Placeholder gambar jika tidak ada URL gambar -->
+        {% endif %}
+    </div>
+
+    <!-- Informasi Produk -->
+    <div class="p-4">
+        <h3 class="font-bold text-lg text-gray-800 mb-2">{{ Product.name }}</h3> <!-- Nama Produk -->
+        <p class="text-gray-600 mb-2">Rp.{{ Product.price }}</p> <!-- Harga Produk -->
+
+        <!-- Lokasi dinamis berdasarkan field city -->
+        <p class="text-sm text-gray-500 mb-2">Kota {{ Product.city }}</p>
+
+        <!-- Rating Produk -->
+        <div class="flex items-center mb-2">
+        <svg class="w-5 h-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l2.9 8.1h8.5L15.5 13l2.9 8.1L12 17 8.6 21.1 11.5 13 3.1 10.1h8.5L12 2z" />
+        </svg>
+        <span class="ml-2 text-gray-700">{{ Product.rating }}</span>
+        </div>
+    </div>
+
+    <!-- Buttons Edit & Delete -->
+    <div class="flex justify-end p-2 space-x-2">
+        <a href="{% url 'main:edit_product' Product.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+        </svg>
+        </a>
+        <a href="{% url 'main:delete_product' Product.pk %}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        </a>
+    </div>
+    </div>
+
+    ```
+    </details> 
+
+    Pertama tama, saya menampilkan gambar dengan _link online_ yang saya masukkan sebagai salah satu atribut dari produk saya, lalu untuk bagian dari informasi produk akan saya tuliskan secara singkat dan hanya sebagian, yaitu nama, harga, kota, dan rating. Saya berencana untuk menampilkan deskripsi hanya ketika kartunya sudah dipencet, namun itu mungkin akan saya lakukan di tugas selanjutnya. Nah, tidak hanya menampilkan produk, saya juga menambahkan tombol edit dan hapus pada kartunya.
+
+    ```bash
+    <!-- Buttons Edit & Delete -->
+    <div class="flex justify-end p-2 space-x-2">
+        <a href="{% url 'main:edit_product' Product.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+        </svg>
+        </a>
+        <a href="{% url 'main:delete_product' Product.pk %}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+        </a>
+    </div>
+
+    ```
+
+    Ketika tombolnya dipencet, maka dia akan mengarahkan ke page `create_product` dan `edit_product`. Nah di page tersebut juga aku sudah menyambungkannya ke function `delete_product` dan `add_produk` yang ada di dalam `views.py`. Jadi, ketika tombol dipencet, kita akan mengisi form tentang informasi produk, dan katika kita selesai, infromasinya akan ditampilkan pada  `card_product.html`. Nah, saya kurang suka nih kalau tidak ada gambar apa apa ketika masih belum ada produk yang ditambahkan, jadi aku mau menambahkan gambar _static_ ketika produk masi kosong. 
+
+    Pertama tama, saya menambahkan `static` pada `settings.py`
+
+    ```bash
+    ...
+    STATIC_URL = '/static/'
+    STATIC_ROOT = BASE_DIR / 'static'
+    ...
+    ```
+
+    Pada page html yang menggunakan gambar _static_, saya menambahkan `{% load static %}` agar dapat mengambil gambar _static_ tersebut. Kemudian, saya membuat folder bernama `static/image` yang isinya saya masukkan gambar emoticon sedih. Nah, kemudian, saya buat jika tidak ada produk, emoticon tersebut akan ditunjukkan.
+
+    ```bash
+        {% if not Products %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <p class="text-center text-gray-400 mt-4">Belum ada data Produk pada Goodsify.</p> <!-- Teks abu -->
+    </div>
+
+    ```
+
+
 ### urutan prioritas pengambilan CSS selector 
 
 Berikut ini adalah tingkatan prioritas CSS Selector dari yang paling rendah ke paling tinggi (no 1 dijalankan paling terakhir):
