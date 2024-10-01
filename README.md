@@ -735,7 +735,9 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
 2. **Kostumisasi halaman _login_, _register_, _Navigation bar_, edit produk, dan tambah produk agar lebih menarik**
 
+
     Agar aplikasi saya terlihat menjadi lebih menarik, saya mulai untuk memperbagus halaman utama dari aplikasi ku terlebih dahulu, terutama _login_ dan _register_ Untuk aplikasi saya, saya ingin menggunakan _vibe_ hijau dan putih, oleh karena itu untuk _login page_, saya mencari gambar furniture dan hiasan no _WaterMark_ dari internet, kemudian saya jadikan sebagai background. Namun, sebelum memulai, saya perlu untuk menambahkan _tailwind_ ke dalam html saya.
+
 
     ```bash 
     <head>
@@ -748,9 +750,14 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
     </head>
     ```
 
+
     Untuk menghias website saya sendiri, saya menggunakan _tailwind_ karena dengan _tailwind_, ada beberapa tampilan yang sudah tersedia seperti icon panah, tong sampah, pensil, dan lainnya. Setelah menemukan _UI_ yang bagus untuk _login page_ saya, saya tinggal menerapkan _style_ yang sama pada _register page_ nya.
+
+
    
-![image](https://github.com/user-attachments/assets/8862eeb4-d433-4665-9c2d-1d57a8f5e0e9)
+    ![image](https://github.com/user-attachments/assets/8862eeb4-d433-4665-9c2d-1d57a8f5e0e9)
+
+
 
     Sesuai gambar tersebut, saya menggunakan foto dan _vibe_ putih hijau, _style_ ini pun juga ku implementasikan pada fitur edit dan tambah produk. Ada fitur tambahan juga yang ku tambahkan, yaitu tombol kembali untuk kembali ke _main page_ :
 
@@ -769,9 +776,12 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
     dengan kode diatas, aku membuat tombol panah kembali di bagian kiri atas buat dan edit produk untuk kembali ke _main page_. Setelah itu, saya lanjut untuk membuat _Navigation bar_ pada atas aplikasi.  
 
+
     
     <details>
     <summary>kode Navigation Bar</summary>
+
+
 
     ```bash 
         <nav class="bg-green-600 shadow-lg fixed top-0 left-0 z-40 w-full">
@@ -850,12 +860,14 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
     dengan menggunakan viewport, maka ketika web di perkecil hingga seukuran HP, maka navigation bar dapat mengecil dan menampilkan menu hamburger.
 
 
-![image](https://github.com/user-attachments/assets/1ce3412d-f167-4c06-824c-e2f79a28d6cf)
+    ![image](https://github.com/user-attachments/assets/1ce3412d-f167-4c06-824c-e2f79a28d6cf)
+
 
 
 3. **Menampilkan Produk**
 
     Untuk menampilkan produk, saya menggunakan 2 file html, yaitu `main.html` dan `card_product.html`. Pertama tama, saya membuat file `card_product.html` terlebih dahulu. `card_product` ini berisi informasi terkait _models_ yang ada di produk yang saya buat seperti nama, deskripsi, harga, dan lain lain.
+
 
     <details>
     <summary>kode card_product</summary>
@@ -906,7 +918,9 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
     ```
     </details> 
 
+
     Pertama tama, saya menampilkan gambar dengan _link online_ yang saya masukkan sebagai salah satu atribut dari produk saya, lalu untuk bagian dari informasi produk akan saya tuliskan secara singkat dan hanya sebagian, yaitu nama, harga, kota, dan rating. Saya berencana untuk menampilkan deskripsi hanya ketika kartunya sudah dipencet, namun itu mungkin akan saya lakukan di tugas selanjutnya. Nah, tidak hanya menampilkan produk, saya juga menambahkan tombol edit dan hapus pada kartunya.
+
 
     ```bash
     <!-- Buttons Edit & Delete -->
@@ -925,9 +939,12 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
     ```
 
+
     Ketika tombolnya dipencet, maka dia akan mengarahkan ke page `create_product` dan `edit_product`. Nah di page tersebut juga aku sudah menyambungkannya ke function `delete_product` dan `add_produk` yang ada di dalam `views.py`. Jadi, ketika tombol dipencet, kita akan mengisi form tentang informasi produk, dan katika kita selesai, infromasinya akan ditampilkan pada  `card_product.html`. Nah, saya kurang suka nih kalau tidak ada gambar apa apa ketika masih belum ada produk yang ditambahkan, jadi aku mau menambahkan gambar _static_ ketika produk masi kosong. 
 
+
     Pertama tama, saya menambahkan `static` pada `settings.py`
+
 
     ```bash
     ...
@@ -937,6 +954,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
     ```
 
     Pada page html yang menggunakan gambar _static_, saya menambahkan `{% load static %}` agar dapat mengambil gambar _static_ tersebut. Kemudian, saya membuat folder bernama `static/image` yang isinya saya masukkan gambar emoticon sedih. Nah, kemudian, saya buat jika tidak ada produk, emoticon tersebut akan ditunjukkan.
+    
 
     ```bash
         {% if not Products %}
