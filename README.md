@@ -750,10 +750,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
 
     Untuk menghias website saya sendiri, saya menggunakan _tailwind_ karena dengan _tailwind_, ada beberapa tampilan yang sudah tersedia seperti icon panah, tong sampah, pensil, dan lainnya. Setelah menemukan _UI_ yang bagus untuk _login page_ saya, saya tinggal menerapkan _style_ yang sama pada _register page_ nya.
    
-
 ![image](https://github.com/user-attachments/assets/8862eeb4-d433-4665-9c2d-1d57a8f5e0e9)
-
-
 
     Sesuai gambar tersebut, saya menggunakan foto dan _vibe_ putih hijau, _style_ ini pun juga ku implementasikan pada fitur edit dan tambah produk. Ada fitur tambahan juga yang ku tambahkan, yaitu tombol kembali untuk kembali ke _main page_ :
 
@@ -771,6 +768,7 @@ Tidak semua cookies aman untuk digunakan, karena beberapa cookies rentan terhada
     ```
 
     dengan kode diatas, aku membuat tombol panah kembali di bagian kiri atas buat dan edit produk untuk kembali ke _main page_. Setelah itu, saya lanjut untuk membuat _Navigation bar_ pada atas aplikasi.  
+
     
     <details>
     <summary>kode Navigation Bar</summary>
