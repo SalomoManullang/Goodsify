@@ -1133,5 +1133,77 @@ _Responsive design_ penting dalam pengembangan aplikasi web karena semakin berag
     | **Kegunaan Utama**         | Membagi area halaman dengan struktur grid yang teratur                      | Menata elemen dalam satu dimensi secara fleksibel                     |
 
 
+</details>
+
+
+# TUGAS 6: Javascript dan AJAX
+
+
+<details>
+    <summary></summary>
+
+### cara mengimplementasikan _Checklist_ tugas
+
+
+### manfaat penggunaan JavaScript dalam pengembangan aplikasi web
+
+Pertama tama, kita perlu tahu apa itu Javascript. Javascript adalah bahasa pemrograman yang berfungsi untuk membuat _Web Page_ menjadi lebih interaktif. Misalnya ketika kita membuka sebuah aplikasi dan banyak animasi seperti animasi reload, berubah warna, pagw halaman, hal tersebut dibuat dnegan memanfaatkan Javascript. Javascript memberikan banyak manfaat dalam pengembangan web, diantaranya adalah: 
+
+
+1. **Meningkatkan _interface_ dan _user experience_**
+
+    Dengan JavaScript, web jadi lebih responsif dan fleksibel. JavaScript memungkinkan adanya tambahan animasi, dropdown, dan perubahan warna yang membuat pengguna lebih nyaman yang secara keseluruhan meningkatkan _user experience_.
+
+2. **Mengurangi beban server**
+
+    Javascript dapat membatasi operasi yang dijalankan oleh suatu _website_. Misalnya kita perlu memasukkan 10 digit angka. Tanpa javascript, jika kita memasukkan 9 angka, maka angka tersebut akan masuk ke sistem dan ditolak karena bukan 10 angka. Namun, dengan Javascript, jika angka kita bukan 10 digit, tidak akan dimasukkan ke sistem dan langsung ditolak.
+
+3. **Asynchronous Data Loading**
+
+    **Asynchronous Data Loading** adalah ketika _website load_ data baru tanpa perlu untuk _reload_ halaman. Contohnya adalah ketika kita membuka website belanja _online_ dan kita _scroll_ sampai bawah, nanti akan muncul data baru tanpa perlu kita melakukan _reload_.
+
+4. **Memungkinkan _website_ bekerja secara konkurensi**
+
+    **konkurensi** berarti _web_ dapat melakukan berbagai operasi di saat yang bersamaan. Contohnya adalah ketika sever memiliki banyak pengguna, server bisa memprosesnya secara pararel tanpa perlu menunggu masing masing proses selesai. 
+
+5. **Mendapatkan independensi platform**
+
+    JavaScript bersifat _platform-independent_, yang artinya bisa dijalankan di berbagai sistem operasi atau perangkat tanpa perlu penyesuaian signifikan. Sebagai contoh, kita bisa membuat aplikasi web menggunakan JavaScript, dan aplikasi tersebut bisa berjalan di komputer , tablet, atau HP tanpa harus menulis kode terpisah untuk setiap platform.
+
+
+### fungsi penggunaan `await` ketika kita menggunakan `fetch()`
+
+pertama tama, kita perlu tahu apa itu `fetch()`. `fetch()` sendiri adalah fungsi yang mengembalikan _promise_ yang dapat berupa Pending, Fullfilled, atau Rejected. Nah, `fetch()` sendiri bersifat asinksronus, yang berarti dia melakukan banyak proses secara bersamaan. Jika tidak menggunakan `await`, maka semua _promise_ akan keluar secara bersamaan dan terkadang malah tidak sesuai dengan hasil yang kita harapkan. Karena itulah, `await` diperlukan, jadi kita menunggu dahulu hasil dari _promise_ tersebut, baru menjalankan proses selanjutnya. Mungkin sebagai ilustrasi kalau kita tak menggunakan `await` adalah ketika kita datang ke sebuah restoran, kita akan memesan 10 pcs kue, dan langsung berpindah meja dan memesan 10 pcs kue lagi tanpa menunggu pesanan kita dikonfirmasi, bisa saja stok kuenya habis ketika kita memesan sebelumnya dan kita sudah memesan kue lagi sebelum pelayan diinfokan bahwa stok sudah habis, hasilnya pesanan kita akan berantakan. Dengan menggunakan `await`, kita menunggu dahulu makanan kita sampai baru memesan makanan baru. 
+
+
+### Mengapa kita perlu menggunakan decorator `csrf_exempt` pada view yang akan digunakan untuk AJAX POST?
+
+`csrf_exempt` membuat Django tidak perlu mengecek keberadaan `csrf_token` pada POST _request_ yang dikirimkan ke fungsi ini. Sebagai konteks, Biasanya, Django mengharuskan setiap **POST request** menyertakan **CSRF token** (Cross-Site Request Forgery token), yang merupakan metode keamanan untuk melindungi aplikasi dari serangan CSRF. Namun, ada situasi di mana validasi token CSRF ini bisa mengganggu, misalnya saat melakukan **AJAX POST request**. Dalam beberapa kasus, request AJAX mungkin tidak menyertakan CSRF token secara otomatis, yang menyebabkan Django memblokir permintaan tersebut karena dianggap tidak aman. Karena itu, kita menggunakan `csrf_exempt` pada _view_ tertentu agar django tidak memblokir _request_ kita. 
+
+
+### pembersihan data _input_ perlu dilakukan di _backend_ dan _frontend_ 
+
+Pembersihan data input tidak boleh dilakukan hanya di _frontend_ karena validasi di _frontend_ dapat dengan mudah dimanipulasi oleh pengguna atau penyerang melalui _developer tools_ di browser. Jika hanya mengandalkan validasi _frontend_, aplikasi menjadi rentan terhadap serangan seperti **Cross Site Scripting** (XSS) dan **SQL Injection**. Oleh karena itu, _backend_ tetap perlu melakukan validasi untuk memastikan bahwa data yang diterima aman dan bersih sebelum disimpan ke dalam database. _Backend validation_ juga penting untuk menjaga integritas data, sehingga aplikasi tidak menyimpan data yang tidak valid atau berbahaya. Dengan validasi di _backend_, meskipun ada upaya _bypass_ di _frontend_, server tetap bisa mencegah data yang merusak masuk ke dalam sistem. Pembersihan seperti menggunakan fungsi `strip_tags` dalam Django adalah contoh bagaimana _backend_ dapat menghapus tag HTML atau kode berbahaya sebelum menyimpan data ke database, melindungi aplikasi dari serangan XSS yang bisa berakibat serius pada keamanan dan pengalaman pengguna.
+
+misalnya, saya membuat aplikasi ulasan restoran. Di _frontend_, pengguna menulis ulasan dan saya memastikan tidak ada input kosong. Namun, seorang penyerang bisa mematikan validasi ini dan mengirimkan kode berbahaya, misalnya kode yang menampilkan _alert pop-up_. Jika hanya dicek di _frontend_, kode tersebut masuk ke server dan bisa merusak sistem. Dengan membersihkan input di _backend_, seperti menggunakan fungsi `strip_tags`, kode berbahaya dihapus sebelum disimpan ke database. Jadi, walaupun penyerang memanipulasi _frontend_, data tetap aman dan bersih di backend.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </details>
