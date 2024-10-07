@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect , reverse  # Tambahkan import redirect di baris ini
 from main.forms import ProductForm
+from django.utils.html import strip_tags
 from main.models import Product
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
@@ -11,38 +12,37 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 @login_required(login_url='/login')
 def show_main(request):
-    products = Product.objects.filter(user=request.user)
     context = {
-        'class': 'PBP B',   
+        'class': 'PBP B',
         'npm': '2306219745',
         'name': request.user.username,
-        'Products': products,  
         'last_login': request.COOKIES.get('last_login', 'Tidak ada data login sebelumnya'),
     }
-
     return render(request, "main.html", context)
 
 def create_product(request):
     form = ProductForm(request.POST or None)
-
+    
     if form.is_valid() and request.method == "POST":
-            product = form.save(commit=False)
-            product.user = request.user
-            product.save()
-            return redirect('main:show_main')
+        product = form.save(commit=False)  # Do not save to the database yet
+        product.user = request.user        # Associate the product with the current user
+        product.save()                     # Save the product to the database
+        return redirect('main:show_main')   # Redirect to the main page after saving
 
     context = {'form': form}
     return render(request, "create_product.html", context)
 
 def show_xml(request):
-    data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)  # Fetch only products belonging to the logged-in user
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
@@ -76,6 +76,8 @@ def login_user(request):
             response = HttpResponseRedirect(reverse("main:show_main"))
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
+      else:
+            messages.error(request, "Invalid username or password. Please try again.")
 
    else:
       form = AuthenticationForm(request)
@@ -101,4 +103,31 @@ def delete_product(request, id):
     produk = Product.objects.get(pk = id)
     produk.delete()
     return HttpResponseRedirect(reverse('main:show_main'))
+
+@csrf_exempt
+@require_POST
+def add_product_ajax(request):
+
+    name = strip_tags(request.POST.get("name"))
+    price = strip_tags(request.POST.get("price")) 
+    description = request.POST.get("description")
+    rating = request.POST.get("rating")
+    stok = request.POST.get("stok")
+    image_url = request.POST.get("image_url")
+    city = request.POST.get("city")
+    user = request.user  # User yang menambahkan produk
+
+    new_product = Product(
+        name=name,
+        price=price,
+        description=description,
+        rating=rating,
+        stok=stok,
+        image_url=image_url,
+        city=city,
+        user=user  # Menautkan produk dengan pengguna yang login
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
 

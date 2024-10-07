@@ -1,6 +1,7 @@
 from django.urls import path
 from main.views import show_main, create_product, show_xml, show_json, show_xml_by_id, show_json_by_id
 from main.views import register
+from main.views import add_product_ajax
 from main.views import login_user
 from main.views import logout_user
 from main.views import edit_produk
@@ -20,7 +21,8 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
-    path('edit-mood/<uuid:id>', edit_produk, name='edit_product'),
-    path('delete/<uuid:id>', delete_product, name='delete_product'), # sesuaikan dengan nama fungsi yang dibuat
+    path('edit-product/<uuid:id>/', views.edit_produk, name='edit_product'),
+    path('delete-product/<uuid:id>/', views.delete_product, name='delete_product'),
+    path('create-mood-entry-ajax', add_product_ajax, name='add_product_ajax'),
 
 ]

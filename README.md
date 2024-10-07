@@ -1144,7 +1144,230 @@ _Responsive design_ penting dalam pengembangan aplikasi web karena semakin berag
 
 ### cara mengimplementasikan _Checklist_ tugas
 
+1. **mengubah kode cards data `produk` agar dapat mendukung AJAX GET dan memastikan data yang diambil hanyalah milik pengguna yang _logged-in_**
 
+    untuk dapat menggunakan ajax GET, aku memodifikasi kodeku, terutama yang bagian `show_xml` dan `show_json` untuk nantinya dapat menggunakan AJAX.
+
+    ```bash
+        def show_xml(request):
+            data = Product.objects.filter(user=request.user)  # Fetch only products belonging to the logged-in user
+            return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+        def show_json(request):
+            data = Product.objects.filter(user=request.user)
+            return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+    ```
+
+    setelah itu, aku function untuk mengambil data di _client-side_ di `main.html` saya menambahkan 
+
+    ```bash
+            async function getProducts() {
+            return fetch("{% url 'main:show_json' %}").then((res) => res.json());
+        }
+    ```
+
+    kode ini bekerja dengan `fetch()` atau mengambil data dari JSON dan nantinya data tersebut akan ditampilkan di halaman utama. menggunakan `get`, kita dapat mengambil nilai dari atribut yang dimasukkan oleh pengguna ke dalam ajax. Kemudian, aku juga menambahkan
+
+    ```bash
+    data = MoodEntry.objects.filter(user=request.user)
+    ```
+
+    pada _function_ `show_xml`dan `show_json`. Hal ini dibutuhkan agar kita bisa langsung mendapatkan informasi produk secara langsung dari xml dan json tanpa lewat _frontend_. hal ini juga bertujuan agar nantinya hasil dari produk yang kita tambahkan bis alangsung ditunjukkan tanpa perlu me-_refresh_ seluruh halaman. `user=request.user` juga bertujuan untuk membatasi produk yang ditampilkan hanyalah milik user yang _logged - in_. 
+
+2. **Buat sebuah tombol yang menampilkan form untuk menambahkan produk**
+
+    untuk menambahkan sebuah pengisian form, saya mengubah `main.html` untuk menambahkan tombol dan form yang akan ditampilkan pada pengguna. 
+
+    ```bash
+        <button data-modal-target="crudModal" data-modal-toggle="crudModal" class="fixed bottom-8 right-24 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105" onclick="showModal();">
+            Add New Product by AJAX
+        </button>
+    ```
+
+    ```html
+        <!-- Modal body -->
+        <div class="px-6 py-4 space-y-6 form-style">
+            <form id="productEntryForm">
+            <!-- Nama Produk -->
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                <input type="text" id="name" name="name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product name" required>
+            </div>
+    
+            <!-- Harga Produk -->
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="number" id="price" name="price" min="0" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product price" required>
+            </div>
+    
+            <!-- Deskripsi Produk -->
+            <div class="mb-4">
+                <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+                <textarea id="description" name="description" rows="3" class="mt-1 block w-full resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product description" required></textarea>
+            </div>
+    
+            <!-- Rating Produk -->
+            <div class="mb-4">
+                <label for="rating" class="block text-sm font-medium text-gray-700">Rating (1-5)</label>
+                <input type="number" id="rating" name="rating" min="1" max="5" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product rating" required>
+            </div>
+    
+            <!-- Stok Produk -->
+            <div class="mb-4">
+                <label for="stok" class="block text-sm font-medium text-gray-700">Stock</label>
+                <input type="number" id="stok" name="stok" min="0" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product stock" required>
+            </div>
+    
+            <!-- URL Gambar Produk -->
+            <div class="mb-4">
+                <label for="image_url" class="block text-sm font-medium text-gray-700">Image URL</label>
+                <input type="url" id="image_url" name="image_url" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter image URL" required>
+            </div>
+    
+            <!-- Kota Produk -->
+            <div class="mb-4">
+                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                <input type="text" id="city" name="city" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter city" required>
+            </div>
+            </form>
+        </div>
+    
+            <!-- Modal footer -->
+            <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 p-6 border-t border-gray-200 rounded-b justify-center md:justify-end">
+                <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg" id="cancelButton">Cancel</button>
+                <button type="submit" id="submitProductEntry" form="productEntryForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg">Save</button>
+            </div>
+            </div>
+        </div>  
+    ```
+
+    kode diatas menunjukkan bagaimana saya membuat sebuh tombol baru untuk menambahkan produk melalui ajax dan kemudian ketika dipencet akan menampulkan form yang dapat diisi. Nanti input dari forms tersebut akan dimasukkan ke dalam produk dan dengan `get` akan dijadikan atribut dari produk yang kita buat. 
+
+3. **membuat fungsi `view` baru untuk menambahkan mood baru ke dalam basis data**
+
+    untuk menambahkan produk saya ke dalam basis data, aku membuat _function_ baru yang bernama `add_product_ajax`. 
+
+    ```bash
+        def add_product_ajax(request):
+
+        name = strip_tags(request.POST.get("name"))
+        price = strip_tags(request.POST.get("price")) 
+        description = request.POST.get("description")
+        rating = request.POST.get("rating")
+        stok = request.POST.get("stok")
+        image_url = request.POST.get("image_url")
+        city = request.POST.get("city")
+        user = request.user  # User yang menambahkan produk
+
+        new_product = Product(
+            name=name,
+            price=price,
+            description=description,
+            rating=rating,
+            stok=stok,
+            image_url=image_url,
+            city=city,
+            user=user  # Menautkan produk dengan pengguna yang login
+        )
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    ```
+
+    _function_ ini nantinya akan menggunakan `get` untuk bisa mengambil nilai input dari forms yang sudah kita masukkan dan menggunakannya sebagai atribut dari produk yang sudah kita buat. 
+
+4. **Buatlah path `/create-ajax/` yang mengarah ke fungsi view yang baru kamu buat**
+
+    Setelah membuat form ajax dan tombol yang memungkinkan kita untuk menambahkan produk baru, saatnya aku membuat function untuk menambahkan produknya dan memperlihatkannya. Karena itu saya membuat _function_ baru yang bernama `refreshproduct` yang bertujuan untuk menampilkan produk yang sudah kita tambahkan.
+
+    ```bash
+        async function refreshProducts() {
+            document.getElementById("product_cards").innerHTML = "";
+            document.getElementById("product_cards").className = "";
+            
+            // Fetch the products assigned to the current user from the server
+            const products = await fetch("{% url 'main:show_json' %}").then((res) => res.json());
+            
+            let htmlString = "";
+            let classNameString = "";
+
+            if (products.length === 0) {
+                classNameString = "flex flex-col items-center justify-center min-h-[24rem] p-6";
+                htmlString = `
+                    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+                        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+                        <p class="text-center text-gray-600 mt-4">Belum ada data produk pada Goodsify.</p>
+                    </div>
+                `;
+            } else {
+                classNameString = "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-6"; // 5 columns
+                products.forEach((item) => {
+                    const name = DOMPurify.sanitize(item.fields.name);
+                    const price = DOMPurify.sanitize(item.fields.price);
+                    const city = DOMPurify.sanitize(item.fields.city);
+                    const rating = DOMPurify.sanitize(item.fields.rating);
+                    const imageUrl = DOMPurify.sanitize(item.fields.image_url);
+
+                    htmlString += `
+                    <div class="relative break-inside-avoid bg-white shadow-md rounded-lg overflow-hidden">
+                        <div class="bg-green-500 text-white p-4">
+                            <img src="${imageUrl}" alt="${name}" class="w-full h-40 object-cover mb-2">
+                            <h3 class="font-bold text-xl mb-2">${name}</h3>
+                            <p class="text-gray-100">Price: ${price}</p>
+                            <p class="text-gray-100">Rating: ${rating} ⭐</p>
+                            <p class="text-gray-100">Location: ${city}</p>
+                        </div>
+                        <div class="absolute bottom-4 right-4 flex space-x-1"> <!-- Adjust positioning here -->
+                            <a href="/edit-product/${item.pk}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" stroke="currentColor">
+                                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                </svg>
+                            </a>
+                            <a href="/delete-product/${item.pk}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" stroke="currentColor">
+                                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    `;
+                });
+            }
+
+            document.getElementById("product_cards").className = classNameString;
+            document.getElementById("product_cards").innerHTML = htmlString;
+        }
+
+    ```
+
+    Fungsi **`refreshProducts()`** dimulai dengan membersihkan kontainer produk dan mereset tampilan layout. Selanjutnya, fungsi ini melakukan **AJAX GET request** untuk mengambil daftar produk dari server. Jika produk kosong, pesan dan gambar default ditampilkan di tengah halaman menggunakan layout yang responsif. Jika ada produk, setiap produk di-render sebagai kartu dengan informasi yang disanitasi menggunakan **DOMPurify** untuk mencegah XSS. Kartu tersebut menampilkan gambar produk, nama, harga, rating, dan kota asal produk. Terdapat juga dua tombol, satu untuk mengedit produk dan satu lagi untuk menghapus produk. Setelah semua produk di-generate sebagai HTML, hasilnya dimasukkan ke elemen kontainer menggunakan **`innerHTML`**, dan tata letak grid disesuaikan untuk menampilkan produk secara responsif berdasarkan ukuran layar.
+
+
+5. **menghubungkan form yang telah saya buat di dalam modal kamu ke path `/create-ajax/`**
+
+    Setelah aku membuat form dalan ajax yang tidak perlu untuk me-_reload_ semua _page_, saat itulah aku perlu untuk menghubungkan form yang aku buat tadi ke dalam path yang dibutuhkan. Oleh karena itu, di `main.html` aku menambahkan _function_ `addProductEntry`
+
+
+    ```bash
+            function addProductEntry() {
+            fetch("{% url 'main:add_product_ajax' %}", {
+            method: "POST",
+            body: new FormData(document.querySelector('#productEntryForm')), // Mengambil data dari form produk
+            })
+            .then(response => refreshProducts()) // Panggil ulang untuk memperbarui daftar produk
+
+            document.getElementById("productEntryForm").reset(); // Reset form setelah submit
+            document.querySelector("[data-modal-toggle='crudModal']").click(); // Menutup modal setelah submit
+
+            return false; // Mencegah reload halaman
+        }
+    ```
+
+    Ketika form `productEntryForm` di-_submit_, JavaScript akan mengirimkan permintaan AJAX POST ke URL `/add-product-ajax/` untuk mengirim data ke server. Jika permintaan berhasil, daftar produk akan diperbarui menggunakan fungsi `refreshProducts()`. Setelah itu, modal akan ditutup dan form akan di-_reset_, memastikan pengalaman pengguna yang lancar tanpa reload halaman.
+
+    
 ### manfaat penggunaan JavaScript dalam pengembangan aplikasi web
 
 Pertama tama, kita perlu tahu apa itu Javascript. Javascript adalah bahasa pemrograman yang berfungsi untuk membuat _Web Page_ menjadi lebih interaktif. Misalnya ketika kita membuka sebuah aplikasi dan banyak animasi seperti animasi reload, berubah warna, pagw halaman, hal tersebut dibuat dnegan memanfaatkan Javascript. Javascript memberikan banyak manfaat dalam pengembangan web, diantaranya adalah: 
